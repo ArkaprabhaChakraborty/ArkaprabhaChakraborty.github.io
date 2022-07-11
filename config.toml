@@ -42,10 +42,10 @@ url = "https://gitlab.com/ArkaprabhaChakraborty"
 
 [[menu.main]]
 name = "Blogs"
-url = "/blogs/"
+url = "/blogs"
 weight = 2
 
 [[menu.main]]
 name = "Projects"
-url = "/projects/"
+url = "/projects"
 weight = 3
