@@ -10,7 +10,7 @@ pygmentscodefencesguesssyntax = true
 enableEmoji = true
 
 [params]
-	mode = "auto"
+	mode = "dark"
 	useCDN = true
     favicon = "https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg" 
     sitename = "Arka's Personal website"
