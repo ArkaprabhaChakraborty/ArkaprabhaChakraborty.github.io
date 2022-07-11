@@ -1,0 +1,51 @@
+baseURL = "https://ArkaprabhaChakraborty.github.io/"
+languageCode = "en-us"
+title = "Arkaprabha Chakraborty"
+theme = "archie"
+copyright = "© ArkaprabhaChakraborty"
+
+# Code Highlight
+pygmentsstyle = "monokai"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+enableEmoji = true
+
+[params]
+	mode = "toggle"
+	useCDN = false
+    favicon = "https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg" 
+    sitename = "Arka's Personal website"
+    description = "Arkaprabha Chakraborty's Personal Website"
+
+
+# Social Tags
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url = "https://github.com/ArkaprabhaChakraborty"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/FValkyrie_17"
+
+[[params.social]]
+name = "GitLab"
+icon = "gitlab"
+url = "https://gitlab.com/ArkaprabhaChakraborty"
+
+
+
+
+# Main menu Items
+
+[[menu.main]]
+name = "Blogs"
+url = "/blogs"
+weight = 2
+
+[[menu.main]]
+name = "Projects"
+url = "/projects"
+weight = 3
