@@ -1,7 +1,6 @@
 baseURL = "https://arkaprabhachakraborty.github.io"
 languageCode = "en-us"
 title = "Arkaprabha Chakraborty"
-theme = "archie"
 copyright = "© ArkaprabhaChakraborty"
 
 # Code Highlight
@@ -11,7 +10,7 @@ pygmentscodefencesguesssyntax = true
 enableEmoji = true
 
 [params]
-	mode = "toggle"
+	mode = "auto"
 	useCDN = true
     favicon = "https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg" 
     sitename = "Arka's Personal website"
@@ -42,10 +41,10 @@ url = "https://gitlab.com/ArkaprabhaChakraborty"
 
 [[menu.main]]
 name = "Blogs"
-url = "/blogs"
+url = "/blogs/:"
 weight = 2
 
 [[menu.main]]
 name = "Projects"
-url = "/projects"
+url = "/projects/:"
 weight = 3
