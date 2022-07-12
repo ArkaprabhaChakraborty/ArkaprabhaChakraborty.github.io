@@ -10,7 +10,8 @@ pygmentscodefencesguesssyntax = true
 enableEmoji = true
 
 [params]
-	mode = "dark"
+	mode = "toggle"
+    og_image = "https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png"
 	useCDN = true
     favicon = "https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg" 
     sitename = "Arka's Personal website"
@@ -40,11 +41,16 @@ url = "https://gitlab.com/ArkaprabhaChakraborty"
 # Main menu Items
 
 [[menu.main]]
-name = "Blogs"
-url = "./blog"
+name = "Home"
+url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Projects"
-url = "./articles"
+name = "Blogs"
+url = "/blog"
 weight = 2
+
+[[menu.main]]
+name = "Projects"
+url = "/posts"
+weight = 3

@@ -1,6 +1,8 @@
 +++
 showdate = false
-date = 2020-01-01 
+date = 2020-01-01
+url = "/"
+type = "page"
 +++
 
 # \[arkaprabha@127.0.0.1\]\$ python3 run intro\.py
