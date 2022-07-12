@@ -2,6 +2,8 @@
 showdate = false
 date = 2020-01-01
 type = "page"
+url = "/home"
+author = "Arkaprabha Chakraborty"
 +++
 
 # \[arkaprabha@127.0.0.1\]\$ python3 run intro\.py
