@@ -1,7 +1,6 @@
 +++
 showdate = false
 date = 2020-01-01
-url = "/"
 type = "page"
 +++
 
