@@ -1,4 +1,4 @@
-baseURL = "https://arkaprabhachakraborty.github.io"
+baseURL = "https://arkaprabhachakraborty.github.io/"
 languageCode = "en-us"
 title = "Arkaprabha Chakraborty"
 copyright = "© ArkaprabhaChakraborty"
@@ -41,10 +41,10 @@ url = "https://gitlab.com/ArkaprabhaChakraborty"
 
 [[menu.main]]
 name = "Blogs"
-url = "/blog"
+url = "./blog"
 weight = 1
 
 [[menu.main]]
 name = "Projects"
-url = "/articles"
+url = "./articles"
 weight = 2
