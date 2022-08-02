@@ -1,7 +1,7 @@
 +++
 showdate = true
 title = "All of my blogs :)"
-date = 2022-07-08
+date = 2022-08-02
 url = "/blog/allmyblogs"
 +++
 
@@ -9,7 +9,7 @@ These are all of my blogs till now in an organised manner. All of these are some
 
 # Miscellaneous:
 
-- [How to setup a blog with Hugo]()  
+- [How to setup a blog with Hugo](https://arkaprabhachakraborty.github.io/blog/portfolio_with_hugo/)  
 
 # Learning Go:
 
