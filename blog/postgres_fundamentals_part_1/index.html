@@ -1,0 +1,113 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>PostgreSQL Fundamentals Part-1 - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction PostgreSQL was created in 1985 by Micheal Stonebraker. The name came from &ldquo;Post&rdquo;-Ingress. It is a free software which is really easy to learn. You can install postgresql on your system by following the docs or this blog. For starters we use the university dataset from kaggle. This has a simple schema but lot&rsquo;s of data which is kinda useful for practicing indexing.
+Creating the database Login to your postgresql interactive terminal using the following bash command:">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="PostgreSQL Fundamentals Part-1">
+<meta property="og:description" content="Introduction PostgreSQL was created in 1985 by Micheal Stonebraker. The name came from &ldquo;Post&rdquo;-Ingress. It is a free software which is really easy to learn. You can install postgresql on your system by following the docs or this blog. For starters we use the university dataset from kaggle. This has a simple schema but lot&rsquo;s of data which is kinda useful for practicing indexing.
+Creating the database Login to your postgresql interactive terminal using the following bash command:">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/postgres_fundamentals_part_1/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-09-20T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-09-20T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="PostgreSQL Fundamentals Part-1">
+<meta name=twitter:description content="Introduction PostgreSQL was created in 1985 by Micheal Stonebraker. The name came from &ldquo;Post&rdquo;-Ingress. It is a free software which is really easy to learn. You can install postgresql on your system by following the docs or this blog. For starters we use the university dataset from kaggle. This has a simple schema but lot&rsquo;s of data which is kinda useful for practicing indexing.
+Creating the database Login to your postgresql interactive terminal using the following bash command:">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.d1574b43a51792a446cd761d6f9b1c9abb39ed2c36ca6984f74aef729eb9f245.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io/>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/home>Home</a>
+<a href=/blog>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+PostgreSQL Fundamentals Part-1
+</h1>
+<div class=meta>
+Posted on Sep 20, 2022
+</div>
+</div>
+<section class=body>
+<h2 id=introduction>Introduction</h2>
+<p>PostgreSQL was created in 1985 by <a href=https://en.wikipedia.org/wiki/Michael_Stonebraker>Micheal Stonebraker</a>. The name came from &ldquo;Post&rdquo;-Ingress. It is a free software which is really easy to learn.
+You can install postgresql on your system by following the <a href=https://www.postgresql.org/download/>docs</a> or this <a href=https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart>blog</a>.
+For starters we use the <a href="https://www.kaggle.com/datasets/ananta/student-performance-dataset?select=Department_Information.csv">university dataset</a> from kaggle. This has a simple schema but lot&rsquo;s of data which is kinda useful for practicing indexing.</p>
+<h2 id=creating-the-database>Creating the database</h2>
+<p>Login to your postgresql interactive terminal using the following bash command:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo -u postgres psql
+</code></pre></div><p>Before we create the database we need to create a user. We will be using the <code>postgres</code> user for this.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>USER</span> universityadmin <span style=color:#66d9ef>WITH</span> <span style=color:#66d9ef>PASSWORD</span> <span style=color:#e6db74>&#39;password&#39;</span>;
+</code></pre></div><p>THe password part can be anything you want. It is also kinda optional but I would recommend you to use it. Also you can use <code>ENCRYPTED</code> keyword before your password to encrypt it.</p>
+<p>Now we need to create a database. We can do this by running the following command in the terminal.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>DATABASE</span> university;
+</code></pre></div><p>Now we need to grant all the privileges to the user we created earlier. We can do this by running the following command.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>GRANT</span> <span style=color:#66d9ef>ALL</span> <span style=color:#66d9ef>PRIVILEGES</span> <span style=color:#66d9ef>ON</span> <span style=color:#66d9ef>DATABASE</span> university <span style=color:#66d9ef>TO</span> universityadmin;
+</code></pre></div><p>This will grant all the privileges to the user we created earlier. The <code>GRANT</code> command has two basic types, one which grants privileges on database objects which include tables, columns, databases, views etc, and the other one that grants membership in a role. You can also grant specific privileges to the user. You can read more about it <a href=https://www.postgresql.org/docs/current/sql-grant.html>here</a>.
+After creating the user and the database we need can login using the user we created provided a user with the same username exists in our system :). To logout from the postgresql terminal we can use:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#960050;background-color:#1e0010>\</span>q
+</code></pre></div><p>Then we can login using the user we created earlier.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>psql -U universityadmin -d university
+</code></pre></div><p>But if the UNIX user universityadmin doesn&rsquo;t exist this will throw an error <code>psql: FATAL: Peer authentication failed for user "universityadmin"</code>. So either we directly login to the database or we canstart a forced socket connection to the database using the following command:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>psql --host<span style=color:#f92672>=</span>localhost --dbname<span style=color:#f92672>=</span>university --username<span style=color:#f92672>=</span>postgres
+</code></pre></div><p>After that we create the tables.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> department (
+    deptid VARCHAR(<span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>,
+    deptname VARCHAR(<span style=color:#ae81ff>60</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    doe TIMESTAMPTZ <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+);
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> employee (
+    empid VARCHAR(<span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>,
+    dob TIMESTAMPTZ <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    doj TIMESTAMPTZ <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    deptid VARCHAR(<span style=color:#ae81ff>10</span>) REFERNCE department(deptid), 
+)
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> student (
+    id VARCHAR(<span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>,
+    doa TIMESTAMPTZ <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    dob TIMESTAMPTZ <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    chdeptid VARCHAR(<span style=color:#ae81ff>10</span>) REFERNCE department(deptid),
+    deptid VARCHAR(<span style=color:#ae81ff>10</span>) REFERNCE department(deptid), 
+)
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgresql data-lang=postgresql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> results (
+    studentid VARCHAR(<span style=color:#ae81ff>10</span>) REFERNCE student(id),
+    sem VARCHAR(<span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    paperid VARCHAR(<span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    papername VARCHAR(<span style=color:#ae81ff>60</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+    marks INT <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+)
+</code></pre></div>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2022 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace()</script></div>
+</body>
+</html>
