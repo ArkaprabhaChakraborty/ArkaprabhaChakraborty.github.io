@@ -137,3 +137,6 @@ We can repeat this for other tables as well. Simply replace the full path of you
 
 This maybe the shittiest schema design ever... There is literally no primary key or foreign keys in these schemas... But it is just for demonstration purposes :). In the next blog I would be normalizing/breaking/building (call it whatever you want because I'll be using some cool postgresql stuffs like arrays :P) these tables into manageable tables with proper relationships. 
 
+## Simple queries to get you started
+
+We have already come across three to four commands already namely CREATE, ALTER, SELECT and COPY. There are many more commands that you can use to perform various operations on the database. I will be listing some of the commands that I use frequently. You can read more about them [here](https://www.postgresql.org/docs/current/sql-commands.html).
