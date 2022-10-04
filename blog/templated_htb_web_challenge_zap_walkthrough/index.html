@@ -1,0 +1,115 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>HTB Web Challenge walkthrough with OWASP ZAP: Templated - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="So I decided to take the Hack The Box(HTB) Web Challenges with OWASP ZAP. This blog is a walkthrough of the &ldquo;Templated&rdquo; web challenge in HTB, shout out to clubby789 for creating this challenge.
+What is ZAP? Zed Attack Proxy (ZAP) is the world&rsquo;s most popular open source web application scanner. ZAP is free to use and tons of different add-ons are available to extend its functionality. Even though ZAP is officially called a &ldquo;web application scanner&rdquo;, we, the contributors and the core team of ZAP, sometimes unofficialy call it an &ldquo;Integrated Hacking Environment (IHE)&rdquo;.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="HTB Web Challenge walkthrough with OWASP ZAP: Templated">
+<meta property="og:description" content="So I decided to take the Hack The Box(HTB) Web Challenges with OWASP ZAP. This blog is a walkthrough of the &ldquo;Templated&rdquo; web challenge in HTB, shout out to clubby789 for creating this challenge.
+What is ZAP? Zed Attack Proxy (ZAP) is the world&rsquo;s most popular open source web application scanner. ZAP is free to use and tons of different add-ons are available to extend its functionality. Even though ZAP is officially called a &ldquo;web application scanner&rdquo;, we, the contributors and the core team of ZAP, sometimes unofficialy call it an &ldquo;Integrated Hacking Environment (IHE)&rdquo;.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/templated_htb_web_challenge_zap_walkthrough/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-10-04T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-10-04T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="HTB Web Challenge walkthrough with OWASP ZAP: Templated">
+<meta name=twitter:description content="So I decided to take the Hack The Box(HTB) Web Challenges with OWASP ZAP. This blog is a walkthrough of the &ldquo;Templated&rdquo; web challenge in HTB, shout out to clubby789 for creating this challenge.
+What is ZAP? Zed Attack Proxy (ZAP) is the world&rsquo;s most popular open source web application scanner. ZAP is free to use and tons of different add-ons are available to extend its functionality. Even though ZAP is officially called a &ldquo;web application scanner&rdquo;, we, the contributors and the core team of ZAP, sometimes unofficialy call it an &ldquo;Integrated Hacking Environment (IHE)&rdquo;.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.d1574b43a51792a446cd761d6f9b1c9abb39ed2c36ca6984f74aef729eb9f245.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io/>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/home>Home</a>
+<a href=/blog>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+HTB Web Challenge walkthrough with OWASP ZAP: Templated
+</h1>
+<div class=meta>
+Posted on Oct 4, 2022
+</div>
+</div>
+<section class=body>
+<p>So I decided to take the <a href=https://www.hackthebox.com/>Hack The Box(HTB)</a> Web Challenges with <a href=https://www.zaproxy.org/>OWASP ZAP</a>. This blog is a walkthrough of the &ldquo;Templated&rdquo; web challenge in HTB, shout out to <a href=https://app.hackthebox.com/users/83743>clubby789</a> for creating this challenge.</p>
+<h1 id=what-is-zap>What is ZAP?</h1>
+<p>Zed Attack Proxy (ZAP) is the world&rsquo;s most popular open source web application scanner. ZAP is free to use and tons of different add-ons are available to extend its functionality. Even though ZAP is officially called a &ldquo;web application scanner&rdquo;, we, the contributors and the core team of ZAP, sometimes unofficialy call it an &ldquo;Integrated Hacking Environment (IHE)&rdquo;.</p>
+<p>You can install ZAP from <a href=https://www.zaproxy.org/download/>here</a>. Or you can also install a &ldquo;dev&rdquo; build by following the instrcutions <a href=https://www.zaproxy.org/docs/developer/quick-start-build/>here</a>. I would recommend you to install the &ldquo;dev&rdquo; build as it has the latest unreleased features :P.</p>
+<h1 id=recon-process>Recon process</h1>
+<p>After installaing ZAP, head to the manual explore option in the quick start panel in ZAP&rsquo;s workspace window (More about ZAP&rsquo;s GUI <a href=https://www.zaproxy.org/getting-started/#zap-desktop-ui>here</a>). I&rsquo;m enabling HUD, but you can skip that option if you want to. Copy the docker instance&rsquo;s socket address and paste it in the &ldquo;URL to explore&rdquo; field. Then click on &ldquo;Launch browser&rdquo; button. This will open up a new tab in your browser. You can use this tab to explore the target. I&rsquo;m using Firefox for this walkthrough.</p>
+<p><img src alt="ZAP' GUI image"></p>
+<p>After launching the browser we get th follwoing screen:</p>
+<p><img src alt="Templated Web Challenge Initial Screen"></p>
+<p>&ldquo;Powered by Flask/Jinja2&rdquo;&mldr; Huh!&mldr; So, initially, the site has nothing much to show apart from this &ldquo;statement&rdquo;. Since the challenge name is &ldquo;Templated&rdquo; and it&rsquo;s an EASY challenge, it&rsquo;s template injection for sure :P. Let&rsquo;s discover more about the site.</p>
+<p>In the response I find this <code>Server: Werkzeug/1.0.1 Python/3.9.0</code>. Flask is a python web framework and Werkzueg (I have no idea how to pronounce this) is a Web Server Gateway Interface (WSGI) library. WSGI is a specification that describes how a web server communicates with web applications, and how web applications can be chained together to process one request (More about WSGI <a href=https://wsgi.readthedocs.io/en/latest/index.html>here</a>). Now Werkzeug has a debug console, which can be accessed at <code>/console</code>. However this has a <a href=https://werkzeug.palletsprojects.com/en/2.2.x/debug/#debugger-pin>debugger pin</a> by default.</p>
+<p>On visiting https:///console I find this:
+<img src alt="Error 404 Image">
+So there is no debug console, ie, debugger is not enabled, but, the &lsquo;console&rsquo; was reflected. Just to be sure that it&rsquo;s templated, I tried a new random endpoint <code>/test</code> and it was reflected too. So, it&rsquo;s templated for sure :P.</p>
+<h1 id=a-short-background-on-ssti>A short background on SSTI</h1>
+<p>SSTI or Server Side Template Injection is a technique in which attacker injects malicious code into a server using the native template syntax. Read more:</p>
+<ul>
+<li><a href=https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server_Side_Template_Injection>OWASP SSTI</a></li>
+<li><a href=https://portswigger.net/web-security/server-side-template-injection>Portswigger labs</a></li>
+<li><a href=https://portswigger.net/kb/papers/serversidetemplateinjection.pdf>James Kettle&rsquo;s whitepaper</a></li>
+<li><a href=https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection>Hacktricks</a></li>
+</ul>
+<h1 id=ssti-with-jinja2>SSTI with Jinja2</h1>
+<p>Werkzeug uses jinja2 templates and flask uses werkzeug. So I did what everyone does, I googled for &ldquo;flask jinja2 ssti&rdquo;. Found this wonderful <a href=https://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/>blog</a> from <a href=https://www.linkedin.com/in/lanmaster53/>Timothy Tomes</a>.</p>
+<p>So I tried the following the browser address bar <code>https://&lt;socket_addr>/console{{7*7}}</code> and returned console49 could not be found. Great!</p>
+<p>Time to sniff out secrets and possibly find out the flag. Tried <code>https://&lt;socket_addr>/console{{config}}</code> and got this:
+<img src alt="Config Image">
+Whelp &mldr; found everything other than the flag.</p>
+<p>Let&rsquo;s try out something more with the config object using ZAP&rsquo;s Request Editor. This can be done easily by right clicking on the request in ZAP&rsquo;s workspace and selecting &ldquo;Open/Resend with Request Editor&rdquo;. I tried injecting <code>config.from_object("os")</code> but returned it None.</p>
+<p>We can get to the <em>os</em> library using something/concept called <em>Method Resolution Order (MRO)</em>. (More about MRO <a href=https://levelup.gitconnected.com/method-resolution-order-in-python-5afbaecc25e0>here</a>).</p>
+<p>Now let&rsquo;s discover the MRO of the config object. I tried <code>{{config.__class__.mro()}}</code>, hit send and got this:
+<img src alt="URL encoded config image">
+The encoded output can be a pain in the eyes so you can select the response body, right click in the reposne body and click on the &ldquo;Encode/Decode/Hash&rdquo; option. In Decode panel under &ldquo;HTML Decode&rdquo; you can see the famailar python3 output.
+<img src alt="URL Decoded image"></p>
+<p>From this we can see conclude that we cannot access the os module from here as there is no reference to <em><strong>globals</strong></em> :) . Without the <em><strong>globals</strong></em> refernce we cannot access <em><strong>builtins</strong></em> and without <em><strong>builtins</strong></em> we cannot access the os module. :)</p>
+<p>So time to try something else. Let&rsquo;s try and see if the site has been configured/ written like the flask bolier plates using an <em>app</em> object. I tried <code>{{app.__class__.mro()}}</code> and got a 500 error. :/</p>
+<p>Let&rsquo;s try this now <code>{{app.__class__.__init__.__globals__}}</code>. It works! We are in business!! :D
+<img src alt="App globals image">
+We can now use <em><strong>builtins</strong></em> to access the os module. Let&rsquo;s try <code>{{app.__class__.__init__.__globals__.__builtins__}}</code> and gotcha:
+<img src alt="App builtins image">
+Now let&rsquo;s import the os module and get the user ids. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").getuid()}}</code> and :)
+<img src alt="UserId image"></p>
+<h1 id=time-to-get-the-flag>Time to get the flag</h1>
+<p>Well we are &ldquo;in&rdquo;. So now time to discover the server. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").popen("ls").read()}}</code> and got this:
+<img src alt="ls image">
+So we have a <em>flag.txt</em> file. Let&rsquo;s try to read it. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").popen("cat flag.txt").read()}}</code> and got this:
+<img src alt="Flag image">
+There is our 31337 string. :)</p>
+<h1 id=conclusion>Conclusion</h1>
+<p>This was a fun challenge. SSTI&rsquo;s like these can be stopped if the input is sanitized and validated properly. That being said it was a very beginner friendly challenge. I hope you enjoyed reading this writeup/blog. :)</p>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2022 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace()</script></div>
+</body>
+</html>
