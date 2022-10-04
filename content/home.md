@@ -7,18 +7,20 @@ author = "Arkaprabha Chakraborty"
 headless = true
 +++
 
-# \[arkaprabha@127.0.0.1\]\$ python3 run intro\.py
+# \[arkaprabha@127.0.0.1\]\$ whoami
 
 ```
 Welcome to my little corner on the Internet.
 
 My name is **Arkaprabha Chakraborty**. I'm from Kolkata, West Bengal, India. 
-I'm a student developer and an avid open source enthusiast.
+I'm a student developer, open source enthusiast and a wannabe secuirty researcher.
 
 :: Things I <3:
-      - Tinkering with OS and Networking.
+      - Tinkering with OS, Networking and Web applications.
       - Containers & Kubernetes.
       - Participating in CTFs.
       - Writing Blogs.
       - Contributing to various FOSS projects regularly.
 ```
+# Recent achievements 🏆:
+- [Google Summer of Code 2022 with OWASP ZAP.](https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero)

@@ -22,4 +22,4 @@ These are all of my blogs till now in an organised manner. All of these are some
 
 # Web Security Learning:
 
-- [HTB Web Challenge walkthrough with OWASP ZAP: Templated](/blog/templated_htb_web_challenge_zap_walkthrough")
+- [HTB Web Challenge walkthrough with OWASP ZAP: Templated](https://arkaprabhachakraborty.github.io/blog/templated_htb_web_challenge_zap_walkthrough")
