@@ -57,9 +57,9 @@ Posted on Oct 4, 2022
 <p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/starting%20page.png?raw=true" alt="Templated Web Challenge Initial Screen"></p>
 <p>&ldquo;Powered by Flask/Jinja2&rdquo;&mldr; Huh!&mldr; So, initially, the site has nothing much to show apart from this &ldquo;statement&rdquo;. Since the challenge name is &ldquo;Templated&rdquo; and it&rsquo;s an EASY challenge, it&rsquo;s template injection for sure :P. Let&rsquo;s discover more about the site.</p>
 <p>In the response I find this <code>Server: Werkzeug/1.0.1 Python/3.9.0</code>. Flask is a python web framework and Werkzueg (I have no idea how to pronounce this) is a Web Server Gateway Interface (WSGI) library. WSGI is a specification that describes how a web server communicates with web applications, and how web applications can be chained together to process one request (More about WSGI <a href=https://wsgi.readthedocs.io/en/latest/index.html>here</a>). Now Werkzeug has a debug console, which can be accessed at <code>/console</code>. However this has a <a href=https://werkzeug.palletsprojects.com/en/2.2.x/debug/#debugger-pin>debugger pin</a> by default.</p>
-<p>On visiting https:///console I find this:
-<img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/error%20page.png?raw=true" alt="Error 404 Image">
-So there is no debug console, ie, debugger is not enabled, but, the &lsquo;console&rsquo; was reflected. Just to be sure that it&rsquo;s templated, I tried a new random endpoint <code>/test</code> and it was reflected too. So, it&rsquo;s templated for sure :P.</p>
+<p>On visiting https:///console I find this:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/error%20page.png?raw=true" alt="Error 404 Image"></p>
+<p>So there is no debug console, ie, debugger is not enabled, but, the &lsquo;console&rsquo; was reflected. Just to be sure that it&rsquo;s templated, I tried a new random endpoint <code>/test</code> and it was reflected too. So, it&rsquo;s templated for sure :P.</p>
 <h1 id=a-short-background-on-ssti>A short background on SSTI</h1>
 <p>SSTI or Server Side Template Injection is a technique in which attacker injects malicious code into a server using the native template syntax. Read more:</p>
 <ul>
@@ -71,9 +71,9 @@ So there is no debug console, ie, debugger is not enabled, but, the &lsquo;conso
 <h1 id=ssti-with-jinja2>SSTI with Jinja2</h1>
 <p>Werkzeug uses jinja2 templates and flask uses werkzeug. So I did what everyone does, I googled for &ldquo;flask jinja2 ssti&rdquo;. Found this wonderful <a href=https://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/>blog</a> from <a href=https://www.linkedin.com/in/lanmaster53/>Timothy Tomes</a>.</p>
 <p>So I tried the following the browser address bar <code>https://&lt;socket_addr>/console{{7*7}}</code> and returned <code>console49</code> could not be found. Great!</p>
-<p>Time to sniff out secrets and possibly find out the flag. Tried <code>https://&lt;socket_addr>/console{{config}}</code> and got this:
-<img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/config%20reflection.png?raw=true" alt="Config Image">
-Welp!! &mldr; found everything other than the flag.</p>
+<p>Time to sniff out secrets and possibly find out the flag. Tried <code>https://&lt;socket_addr>/console{{config}}</code> and got this:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/config%20reflection.png?raw=true" alt="Config Image"></p>
+<p>Welp!! &mldr; found everything other than the flag.</p>
 <p>Let&rsquo;s try out something more with the config object using ZAP&rsquo;s Request Editor. This can be done easily by right clicking on the request in ZAP&rsquo;s workspace and selecting &ldquo;Open/Resend with Request Editor&rdquo;. I tried modifying the URL in request header, appending the following template to try and get an injection:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{config<span style=color:#f92672>.</span>from_object(<span style=color:#e6db74>&#34;os&#34;</span>)}}
 </code></pre></div><p>but returned it <code>None</code> :). SWEET! :)</p>
@@ -89,8 +89,8 @@ Now let&rsquo;s discover the MRO of the config object. I tried:</p>
 <p>Let&rsquo;s try this now</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__}}
 </code></pre></div><p>It works! We are in business!! :D</p>
-<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/global.png?raw=true" alt="App globals image">
-We can now use <em>__builtins__</em> to access the os module. Let&rsquo;s try</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/global.png?raw=true" alt="App globals image"></p>
+<p>We can now use <em>__builtins__</em> to access the os module. Let&rsquo;s try</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__<span style=color:#f92672>.</span>__builtins__}}
 </code></pre></div><p>and gotcha:</p>
 <p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/builtins.png?raw=true" alt="App builtins image"></p>
