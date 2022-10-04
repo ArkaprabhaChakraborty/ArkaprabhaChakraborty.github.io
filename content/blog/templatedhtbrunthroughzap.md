@@ -26,7 +26,9 @@ After launching the browser we get th following screen:
 In the response I find this `Server: Werkzeug/1.0.1 Python/3.9.0`. Flask is a python web framework and Werkzueg (I have no idea how to pronounce this) is a Web Server Gateway Interface (WSGI) library. WSGI is a specification that describes how a web server communicates with web applications, and how web applications can be chained together to process one request (More about WSGI [here](https://wsgi.readthedocs.io/en/latest/index.html)). Now Werkzeug has a debug console, which can be accessed at `/console`. However this has a [debugger pin](https://werkzeug.palletsprojects.com/en/2.2.x/debug/#debugger-pin) by default. 
 
 On visiting https://<socket>/console I find this:
+
 ![Error 404 Image](https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/error%20page.png?raw=true)
+
 So there is no debug console, ie, debugger is not enabled, but, the 'console' was reflected. Just to be sure that it's templated, I tried a new random endpoint `/test` and it was reflected too. So, it's templated for sure :P.
 
 # A short background on SSTI
@@ -44,7 +46,9 @@ Werkzeug uses jinja2 templates and flask uses werkzeug. So I did what everyone d
 So I tried the following the browser address bar `https://<socket_addr>/console{{7*7}}` and returned `console49` could not be found. Great!
 
 Time to sniff out secrets and possibly find out the flag. Tried `https://<socket_addr>/console{{config}}` and got this:
+
 ![Config Image](https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/config%20reflection.png?raw=true)
+
 Welp!! ... found everything other than the flag.
 
 Let's try out something more with the config object using ZAP's Request Editor. This can be done easily by right clicking on the request in ZAP's workspace and selecting "Open/Resend with Request Editor". I tried modifying the URL in request header, appending the following template to try and get an injection:
@@ -77,6 +81,7 @@ Let's try this now
 It works! We are in business!! :D
 
 ![App globals image](https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/global.png?raw=true)
+
 We can now use *\_\_builtins\_\_* to access the os module. Let's try 
 ```python3
 {{app.__class__.__init__.__globals__.__builtins__}}
