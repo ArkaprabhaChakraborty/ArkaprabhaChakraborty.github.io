@@ -1,0 +1,131 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Basics of Security - Part 1 (Theory notes made by googling and reading different articles) - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="What is Computer Security? Computer security is the protection of items of value, called assets, of a computer or computer system. There are many types of assets, involving hardware, software, data, process, staff, or a combination thereof.
+Computer security:  Integrates into the Assets Life Cycle: Security begins with acquiring assets. It is important that there is a chain of custody for the physical assets, up to and including when the asset is powered on.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="Basics of Security - Part 1 (Theory notes made by googling and reading different articles)">
+<meta property="og:description" content="What is Computer Security? Computer security is the protection of items of value, called assets, of a computer or computer system. There are many types of assets, involving hardware, software, data, process, staff, or a combination thereof.
+Computer security:  Integrates into the Assets Life Cycle: Security begins with acquiring assets. It is important that there is a chain of custody for the physical assets, up to and including when the asset is powered on.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/basics_of_security_1/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-10-04T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-10-04T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Basics of Security - Part 1 (Theory notes made by googling and reading different articles)">
+<meta name=twitter:description content="What is Computer Security? Computer security is the protection of items of value, called assets, of a computer or computer system. There are many types of assets, involving hardware, software, data, process, staff, or a combination thereof.
+Computer security:  Integrates into the Assets Life Cycle: Security begins with acquiring assets. It is important that there is a chain of custody for the physical assets, up to and including when the asset is powered on.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.d1574b43a51792a446cd761d6f9b1c9abb39ed2c36ca6984f74aef729eb9f245.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io/>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/home>Home</a>
+<a href=/blog>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+Basics of Security - Part 1 (Theory notes made by googling and reading different articles)
+</h1>
+<div class=meta>
+Posted on Oct 4, 2022
+</div>
+</div>
+<section class=body>
+<h1 id=what-is-computer-securitywhat_is_security><a href=#what_is_security>What is Computer Security?</a></h1>
+<p>Computer security is the protection of items of value, called assets, of a computer or computer system. There are many types of assets, involving hardware, software, data, process, staff, or a combination thereof.</p>
+<h1 id=computer-security>Computer security:</h1>
+<ul>
+<li><strong>Integrates into the Assets Life Cycle</strong>: Security begins with acquiring assets. It is important that there is a chain of custody for the physical assets, up to and including when the asset is powered on.</li>
+<li><strong>Integrates into the Software Development Life Cycle</strong>: Software development life cycle is a process that includes Design, Development, Testing, and Deployment. It is critical that security is considered during the design phase of a project.</li>
+<li><strong>Establishing Organizational Policies and Procedures</strong>: Establishing policies and procedures reduces the risk of accidental or intentional harm.</li>
+<li><strong>Defining Roles and Responsibilities</strong>: It is important to establish a hierarchical structure for incident response. There needs to be a defined leader or plan for assigning a leader due the strenuous nature of the job.</li>
+</ul>
+<hr>
+<h1 id=basic-principlesbasic_principles><a href=#basic_principles>Basic Principles:</a></h1>
+<p>The basic principles of computer security are:</p>
+<ul>
+<li><a href=#assessment><strong>Assessment</strong></a>
+<ul>
+<li>Assessment is the operation of determining the value of assets and the cost of implementing security to protect those assets.</li>
+<li>The focus is generally on the most valuable assets.</li>
+<li>Because of limited resources, 100% security is impossible to achieve. Priorities will be assigned to specific assets based on their value. Knowing the value of each asset and the cost of securing each item is critical in focusing the security resources.</li>
+<li>Residual risks are those that are unsecured by controls post-deployment. These are generally not a priority or cost-prohibitive items that are left unaddressed in the security framework. You should document them. Examples:
+<ul>
+<li>Single sign-on systems can introduce new security concerns.</li>
+<li>Additional security staff is itself a risk.</li>
+<li>Centralization of services introduces greater risk of downtime through single points of failure and attack.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#prevention><strong>Prevention</strong></a>
+<ul>
+<li>Prevention of known risks is the easiest and likely the most cost effective principle to incorporate into a system.</li>
+<li>Prevention is the implementation of security measures, called controls, to protect assets identified during the assessment stage. Controls refer to software and strategies deployed to protect the assets.</li>
+<li>There are three types of controls:
+<ul>
+<li>Technical controls involve software and hardware to protect assets.</li>
+<li>Procedural controls involve processes and policies designed to prevent loss and damage.</li>
+<li>Physical controls involve facilities, staff, key cards, locks, and other measures.</li>
+</ul>
+</li>
+<li>For each asset, there is some aspect that needs to be protected. For example,
+<ul>
+<li>For services: Does it need to be available?</li>
+<li>For data: Does it need to be confidential?</li>
+<li>For new software: Can the integrity of the code and executables be assured?</li>
+</ul>
+</li>
+<li>There are an unlimited number of threats out in the world; they can be accidental, malicious, and directed. It is impossible to prevent them all, which is why the assessment stage is important.</li>
+</ul>
+</li>
+<li><a href=#detection><strong>Detection</strong></a>
+<ul>
+<li>Detection is the process of identifying a threat to an asset.</li>
+<li>Detection involves monitoring through the use of various technologies, such as remote logging, system statistics, and performance metrics. Detection can be the most expensive and can be difficult to execute effectively.</li>
+<li>Intrusion Detection and Prevention Systems (IDPS) are used to identify possible incidents, create a consistent audit trail, and report attempted intrusions.</li>
+<li>Current incident detection methods include signature-based, statistical anomaly-based, and stateful protocol analysis.</li>
+<li>Stateful protocol analysis includes system monitoring. Statistical anomaly based detection involves creating a baseline and monitoring for anomalies. Tools like Prometheus are helpful for production-wide metrics and a time-series database to view historical information. The use of production-wide logging is also essential to understand typical usage, as well as unusual activity.</li>
+</ul>
+</li>
+<li><a href=#reaction><strong>Reaction</strong></a>
+<ul>
+<li>Reaction is one of the least considered principles, and catastrophes often result from poorly planned reactions to vulnerabilities and risks. How an incident is addressed may have long term effects and must be considered carefully.</li>
+<li>While detection of system risks is critically important, how an organization reacts to these vulnerabilities can determine the survival of the system and, in some cases, the organization itself. Reaction can range from adding firewall rules, adding scanners, re-implementing the systems, or shutting down certain components. An inappropriate response can be disastrous in its technical effectiveness or simply in its perceived effectiveness. If users and consumers are not confident in an organization’s reaction to a threat, they may move to other competitors.</li>
+<li>Part of the reaction is ensuring business continuity. Business continuity requires knowing which components are most important for the business. This topic is also addressed during the assessment phase of any security framework.</li>
+<li>It is important to maintain a focus on problem solving. Work on solutions rather than specific blame. Blame is an unproductive activity. Unexpected failures will occur no matter how much planning and implementation is effected. Root cause analysis is productive for identifying technical issues.</li>
+</ul>
+</li>
+</ul>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2022 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace()</script></div>
+</body>
+</html>
