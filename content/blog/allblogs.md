@@ -12,14 +12,11 @@ These are all of my blogs till now in an organised manner. All of these are some
 - [How to setup a blog with Hugo](https://arkaprabhachakraborty.github.io/blog/portfolio_with_hugo)  
 - [Postgres Fundamentals Part1](https://arkaprabhachakraborty.github.io/blog/postgres_fundamentals_part_1)
 
-# Learning Go:
-
-- Things will come here soon.
-
 # Learning DevOps with baby steps:
 
 - Things will come here soon.
 
-# Web Security Learning:
-
+# Security Learning:
+- [Basics of Security - Part 1](https://arkaprabhachakraborty.github.io/blog/basics_of_security_1)
+- [Basics of Security - Part 2](https://arkaprabhachakraborty.github.io/blog/basics_of_security_2) 
 - [HTB Web Challenge walkthrough with OWASP ZAP: Templated](https://arkaprabhachakraborty.github.io/blog/templated_htb_web_challenge_zap_walkthrough")
