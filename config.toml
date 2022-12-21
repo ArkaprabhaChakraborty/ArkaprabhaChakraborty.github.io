@@ -35,19 +35,18 @@ name = "GitLab"
 icon = "gitlab"
 url = "https://gitlab.com/ArkaprabhaChakraborty"
 
+[[params.social]]
+name = "LinkedIn"
+icon = "linkedin"
+url = "https://www.linkedin.com/in/arkaprabhachakraborty/"
 
 
 
 # Main menu Items
 
 [[menu.main]]
-name = "Home"
-url = "/home"
-weight = 1
-
-[[menu.main]]
 name = "Blogs"
-url = "/blog"
+url = "/blog/all_of_my_blogs"
 weight = 2
 
 [[menu.main]]
