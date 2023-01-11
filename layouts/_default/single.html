@@ -21,6 +21,9 @@
 
 		<section class="body">
 			{{ .Content }}
+			{{ if (.Params.mermaid) }}
+			{{ partial "mermaid.html" }}
+			{{ end }}
 		</section>
 
 		<div class="post-tags">
