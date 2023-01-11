@@ -1,0 +1,106 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Value Stream Maps (VSM) DevOps Basics - Part 6 - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="What is a VSM? A value stream map is a popular tool for DevOps transformation. Basically it is a flowchart like technique which identifies all the relevant application and systems and visualize the end to end delivery process. It provides a visibilty of work for the organization. You can create a value stream map by gathering stakeholders from every part of the product development value stream: the business line, design, testing, QA, operations, and support.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="Value Stream Maps (VSM) DevOps Basics - Part 6">
+<meta property="og:description" content="What is a VSM? A value stream map is a popular tool for DevOps transformation. Basically it is a flowchart like technique which identifies all the relevant application and systems and visualize the end to end delivery process. It provides a visibilty of work for the organization. You can create a value stream map by gathering stakeholders from every part of the product development value stream: the business line, design, testing, QA, operations, and support.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/devops_basics_6/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-12-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-12-23T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Value Stream Maps (VSM) DevOps Basics - Part 6">
+<meta name=twitter:description content="What is a VSM? A value stream map is a popular tool for DevOps transformation. Basically it is a flowchart like technique which identifies all the relevant application and systems and visualize the end to end delivery process. It provides a visibilty of work for the organization. You can create a value stream map by gathering stakeholders from every part of the product development value stream: the business line, design, testing, QA, operations, and support.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.d1574b43a51792a446cd761d6f9b1c9abb39ed2c36ca6984f74aef729eb9f245.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io//home>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/blog/all_of_my_blogs>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+Value Stream Maps (VSM) DevOps Basics - Part 6
+</h1>
+<div class=meta>
+Posted on Dec 23, 2022
+</div>
+</div>
+<section class=body>
+<h1 id=what-is-a-vsm><a href>What is a VSM?</a></h1>
+<p>A value stream map is a popular tool for DevOps transformation. Basically it is a flowchart like technique which identifies all the relevant application and systems and visualize the end to end delivery process. It provides a visibilty of work for the organization. You can create a value stream map by gathering stakeholders from every part of the product development value stream: the business line, design, testing, QA, operations, and support. You break the value stream into 5 to 15 process blocks. In each block, you record the activity that&rsquo;s performed.</p>
+<p>Let&rsquo;s take an example with the following flowchart:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>flowchart LR
+    A[Customer]
+    B(Design &amp; Analysis)
+    C(Approval)
+    D(&#34;Release Planning &amp; Estimation&#34;)
+    E(&#34;Development &amp; Dev Testing (including test automation)&#34;)
+    F(&#34;Showcase &amp; UAT&#34;)
+    G(&#34;Exploratory &amp; perf testing&#34;)
+    H(&#34;Change approval&#34;)
+    I(&#34;Production deployment&#34;)
+
+    A ===&gt; B
+    I ===&gt; A
+
+    F -...-&gt; H
+    
+    subgraph &#34;Line Of Buisness&#34;
+        B -..-&gt; C
+    end
+
+    subgraph &#34;Project Management Office&#34;
+        C -...-&gt; D
+    end
+    
+    subgraph &#34;Engineering&#34;
+        D -...-&gt; E
+    end
+
+    subgraph &#34;QA&#34;
+        E -...-&gt; F
+        F -...-&gt; G
+    end
+
+
+    subgraph &#34;IT Ops&#34;
+        H -...-&gt; I
+    end
+
+    G -...-&gt; I
+
+</code></pre></div>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a><a class=soc href=https://www.linkedin.com/in/arkaprabhachakraborty/ title=LinkedIn><i data-feather=linkedin></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2023 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace()</script></div>
+</body>
+</html>
