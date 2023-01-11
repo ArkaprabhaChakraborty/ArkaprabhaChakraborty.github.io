@@ -14,7 +14,12 @@ These are all of my blogs till now in an organised manner. All of these are some
 
 # Learning DevOps with baby steps:
 
-- Things will come here soon.
+- [DevOps Basics - Part 1](/blog/devops_basics_1)
+- [DevOps Basics - Part 2](/blog/devops_basics_2)
+- [DevOps Basics - Part 3](/blog/devops_basics_3)
+- [DevOps Basics - Part 4](/blog/devops_basics_4)
+- [DevOps Basics - Part 5](/blog/devops_basics_5)
+- [DevOps Basics - Part 6](/blog/devops_basics_6)
 
 # Security Learning:
 - [Basics of Security - Part 1](/blog/basics_of_security_1)
