@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.d1574b43a51792a446cd761d6f9b1c9abb39ed2c36ca6984f74aef729eb9f245.css>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.162c6fc2a0fb46ec03fcad2912c8bcdbecee0d774dd88cf72ec4dbdd1dc7753f.css>
 <link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
 </head>
 <body>
@@ -44,48 +44,42 @@ Posted on Dec 23, 2022
 <section class=body>
 <h1 id=what-is-a-vsm><a href>What is a VSM?</a></h1>
 <p>A value stream map is a popular tool for DevOps transformation. Basically it is a flowchart like technique which identifies all the relevant application and systems and visualize the end to end delivery process. It provides a visibilty of work for the organization. You can create a value stream map by gathering stakeholders from every part of the product development value stream: the business line, design, testing, QA, operations, and support. You break the value stream into 5 to 15 process blocks. In each block, you record the activity that&rsquo;s performed.</p>
-<p>Let&rsquo;s take an example with the following flowchart:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>flowchart LR
-    A[Customer]
-    B(Design &amp; Analysis)
+<p>Let&rsquo;s take an example with the following flowchart:
+<div class=mermaid>
+flowchart LR
+A[Customer]
+B(Design & Analysis)
     C(Approval)
-    D(&#34;Release Planning &amp; Estimation&#34;)
-    E(&#34;Development &amp; Dev Testing (including test automation)&#34;)
-    F(&#34;Showcase &amp; UAT&#34;)
-    G(&#34;Exploratory &amp; perf testing&#34;)
-    H(&#34;Change approval&#34;)
-    I(&#34;Production deployment&#34;)
-
-    A ===&gt; B
-    I ===&gt; A
-
-    F -...-&gt; H
-    
-    subgraph &#34;Line Of Buisness&#34;
-        B -..-&gt; C
-    end
-
-    subgraph &#34;Project Management Office&#34;
-        C -...-&gt; D
-    end
-    
-    subgraph &#34;Engineering&#34;
-        D -...-&gt; E
-    end
-
-    subgraph &#34;QA&#34;
-        E -...-&gt; F
-        F -...-&gt; G
-    end
-
-
-    subgraph &#34;IT Ops&#34;
-        H -...-&gt; I
-    end
-
-    G -...-&gt; I
-
-</code></pre></div>
+    D("Release Planning & Estimation")
+    E("Development & Dev Testing (including test automation)")
+F("Showcase & UAT")
+    G("Exploratory & perf testing")
+H("Change approval")
+I("Production deployment")
+A ===> B
+I ===> A
+F -...-> H
+subgraph "Line Of Buisness"
+B -..-> C
+end
+subgraph "Project Management Office"
+C -...-> D
+end
+subgraph "Engineering"
+D -...-> E
+end
+subgraph "QA"
+E -...-> F
+F -...-> G
+end
+subgraph "IT Ops"
+H -...-> I
+end
+G -...-> I
+</div>
+</p>
+<script type=application/javascript src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script>
+<script>var config={startOnLoad:!0,theme:localStorage.getItem("theme-storage")||"light"};mermaid.initialize(config)</script>
 </section>
 <div class=post-tags>
 </div>
