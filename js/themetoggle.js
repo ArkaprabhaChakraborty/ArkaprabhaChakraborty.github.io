@@ -8,7 +8,7 @@ function setTheme(mode) {
         document.getElementById("darkModeStyle").disabled=true;
         document.getElementById("dark-mode-toggle").innerHTML = "<i data-feather=\"moon\"></i>";
         feather.replace()
-    }    
+    }
 }
 
 function toggleTheme() {

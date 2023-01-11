@@ -232,17 +232,9 @@ justify-content: space-between;
   color:white;
   background-color: var(--hovercolor); 
 }
-
-.feather-sun{
-  width: 15px;
-  height: 15px;
+svg{
+  max-height: 15px;
 }
-
-.feather-moon{
-  width: 15px;
-  height: 15px;
-}
-
 .soc:hover{
   color: white;
 }
