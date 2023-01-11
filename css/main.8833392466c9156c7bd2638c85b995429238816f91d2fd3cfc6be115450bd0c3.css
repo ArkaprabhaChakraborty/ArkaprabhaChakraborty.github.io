@@ -232,6 +232,22 @@ justify-content: space-between;
   color:white;
   background-color: var(--hovercolor); 
 }
+.feather-sun{
+  width: 15px;
+  height: 15px;
+}
+
+.feather-moon{
+  width: 15px;
+  height: 15px;
+}
+
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 25px 0px
+}
+
 
 .soc:hover{
   color: white;
