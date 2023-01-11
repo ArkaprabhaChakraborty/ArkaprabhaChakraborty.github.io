@@ -1,0 +1,90 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Where to start??? DevOps Basics - Part 5 - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Find your MVC Minimum viable cluster (MVC) is a subset of applications that are the most important to the business and are the best candidates for a DevOps transformation. Improving the MVC leads to faster and more reliable delivery of business value.
+Thge concept behind this is that of a weakest link in a chain. the weakest link in a chain defines the overall doability of a chain. Similarly the applicatiion witth lowest maturity in a cluster tends to define oyour ability to deliver.">
+<meta property="og:image" content>
+<meta property="og:title" content="Where to start??? DevOps Basics - Part 5">
+<meta property="og:description" content="Find your MVC Minimum viable cluster (MVC) is a subset of applications that are the most important to the business and are the best candidates for a DevOps transformation. Improving the MVC leads to faster and more reliable delivery of business value.
+Thge concept behind this is that of a weakest link in a chain. the weakest link in a chain defines the overall doability of a chain. Similarly the applicatiion witth lowest maturity in a cluster tends to define oyour ability to deliver.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/devops_basics_5/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-12-26T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-12-26T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Where to start??? DevOps Basics - Part 5">
+<meta name=twitter:description content="Find your MVC Minimum viable cluster (MVC) is a subset of applications that are the most important to the business and are the best candidates for a DevOps transformation. Improving the MVC leads to faster and more reliable delivery of business value.
+Thge concept behind this is that of a weakest link in a chain. the weakest link in a chain defines the overall doability of a chain. Similarly the applicatiion witth lowest maturity in a cluster tends to define oyour ability to deliver.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.cceb5a7eebbb93e596164f7d23a3dc2bb87ef2b390efecc09bf6f7503c9192b3.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+<script src=https://cdn.jsdelivr.net/npm/mermaid@9></script>
+<script>mermaid.initialize({startOnLoad:!0,theme:localStorage.getItem("theme-storage")})</script>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io//home>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/blog/all_of_my_blogs>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+Where to start??? DevOps Basics - Part 5
+</h1>
+<div class=meta>
+Posted on Dec 26, 2022
+</div>
+</div>
+<section class=body>
+<h1 id=find-your-mvcfind-your-mvc><a href=#find-your-mvc>Find your MVC</a></h1>
+<p>Minimum viable cluster (MVC) is a subset of applications that are the most important to the business and are the best candidates for a DevOps transformation. Improving the MVC leads to faster and more reliable delivery of business value.</p>
+<p>Thge concept behind this is that of a weakest link in a chain. the weakest link in a chain defines the overall doability of a chain. Similarly the applicatiion witth lowest maturity in a cluster tends to define oyour ability to deliver.</p>
+<p>To get the minimum viable cluster we follow the following iterative approach:</p>
+<ul>
+<li>Pick an application having the highest priority, attained by the application portfolio analysis.</li>
+<li>Identify the dependencies of the application. It is important to look for dependencies related to changes - to identify systems that need to change togather to enable new functionality - Just the most dependencies will do he work.</li>
+<li>Once we have identified the appilcations that change togather with out first application, we have identified our first cluster.</li>
+<li>We then go through all the applications in a cluster to check for new dependencies. We continue this process until we have identified all the applications that change togather, aka, a stable cluster.</li>
+</ul>
+<p><strong>Disclaimer</strong>: The MVC is not a static concept. It is a dynamic concept that changes over time. It is important to keep an eye on the MVC and make sure that it is still the most important cluster to focus on and doesn&rsquo;t become unwieldy. Adding and removing applications from the MVC is a normal part of the DevOps transformation and its not always <em>exact</em>.</p>
+<h1 id=boost-of-capabilities-using-mvcboost-of-capabilities-using-mvc><a href=#boost-of-capabilities-using-mvc>Boost of Capabilities using MVC</a></h1>
+<p>After finding a cluster of applications a Value Stream Map (VSM) can be used to find the gaps and more details (More about this on part 6). Other than doing a VSM we can also look at the five core themes of DevOps capabilities and identify which one of them provides the most value if uplifted next. These are:</p>
+<ul>
+<li><strong>Configuration Management</strong>: allows us to know what is exactly in every environment, in every server and in each piece of code and software. this helps in automating large parts of DevOps capabilities as we know exactly what configurations we need to change to enable new functionality. Without solid configuration management, the automation will fail frequently.</li>
+<li><strong>Deployment and release</strong>: it&rsquo;s the process of EXACTLY WHAT IT SAYS, just add a &ldquo;for software&rdquo; to it :). This quite often the easiest to automate. We need to make this &ldquo;<em>boring</em>&rdquo; by making this have minimal manual steps, align the process into different environments and so that we can reliably follow the same process to make the deployment and release consistent.</li>
+<li><strong>Testing</strong>: it is a large and complex field which involves autpmated testing of applications. The common first goal is to setup an automated regression test suite and run it atleast once per agile cycle. The other aspects of testing involves security testing, performance testing, progression testing, usability testing and validation testing.</li>
+<li><strong>Environment Management</strong>: deals with the creation and management of environment for development, testing or production purposes.</li>
+<li><strong>Operations</strong>: Production is what counts for customers, improving the operations capabilities is the most important part of the DevOps transformation. This involves monitoring, logging, alerting, incident management, change management, capacity management, performance management, security management, compliance management, disaster recovery and so on.</li>
+</ul>
+<p>The tip is get all the applications in the cluster to the same level of capabilities first, before making further investments, so that the benefits can be reaped as eaarly as possible.</p>
+<h4 id=up-next---devops-basics---part-6blogdevops_basics_6>Up Next - <a href=/blog/devops_basics_6>DevOps Basics - Part 6</a></h4>
+<h4 id=previous---devops-basics---part-4blogdevops_basics_4>Previous - <a href=/blog/devops_basics_4>DevOps Basics - Part 4</a></h4>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a><a class=soc href=https://www.linkedin.com/in/arkaprabhachakraborty/ title=LinkedIn><i data-feather=linkedin></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2023 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace({style:'max-height:15px !important'})</script></div>
+</body>
+</html>
