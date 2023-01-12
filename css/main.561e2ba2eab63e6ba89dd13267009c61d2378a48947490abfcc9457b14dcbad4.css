@@ -244,8 +244,15 @@ justify-content: space-between;
 
 .mermaid {
   display: flex;
-  justify-content: center;
-  margin: 10px 0px 25px 0px
+  min-height: 200px;
+  min-width: 2500px;
+}
+
+.scrollHorizontal {
+  width:800px;
+  height:300px;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 
