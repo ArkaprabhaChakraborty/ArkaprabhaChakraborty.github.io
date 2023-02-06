@@ -14,14 +14,17 @@ These are all of my blogs till now in an organised manner. All of these are some
 
 # Learning DevOps with baby steps:
 
-- [DevOps Basics - Part 1](/blog/devops_basics_1)
-- [DevOps Basics - Part 2](/blog/devops_basics_2)
-- [DevOps Basics - Part 3](/blog/devops_basics_3)
-- [DevOps Basics - Part 4](/blog/devops_basics_4)
-- [DevOps Basics - Part 5](/blog/devops_basics_5)
-- [DevOps Basics - Part 6](/blog/devops_basics_6)
+- [DevOps Basics - Part 1: WTF is DevOps? 🤨](/blog/devops_basics_1)
+- [DevOps Basics - Part 2: The Corporate Culture 🧘](/blog/devops_basics_2) 
+- [DevOps Basics - Part 3: Dimensions of Enterprise DevOps!? 🧊](/blog/devops_basics_3)
+- [DevOps Basics - Part 4: Uhh where do we start? 🚀](/blog/devops_basics_4)
+- [DevOps Basics - Part 5: Where to start?? 🚗](/blog/devops_basics_5)
+- [DevOps Basics - Part 6: The What Map?! 🗾](/blog/devops_basics_6)
 
 # Security Learning:
-- [Basics of Security - Part 1](/blog/basics_of_security_1)
-- [Basics of Security - Part 2](/blog/basics_of_security_2) 
+- [Basics of Security - Part 1: What is Computer Security? 💻](/blog/basics_of_security_1)
+- [Basics of Security - Part 2: H4X0R or H4Ck3r 🐱‍💻](/blog/basics_of_security_2)
+- [The CIA Triad ♺](/blog/cia_triad)
+- [Networking Essentials](/blog/networking_essentials)
+- [The OWASP Top 10 for Dummies :P](/blog/owasp_top_10)
 - [HTB Web Challenge walkthrough with OWASP ZAP: Templated](/blog/templated_htb_web_challenge_zap_walkthrough)
