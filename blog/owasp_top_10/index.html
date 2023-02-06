@@ -1,0 +1,76 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>The OWASP Top 10 (Theory notes made by googling and reading different articles) - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="What is OWASP Top 10? Well it&rsquo;s simply a list of top 10 web application security vulnerabilities. The link to the actual source material has been given already, so you can read more about it there. The list was last updated in 2021. Many security researchers including the very best in OWASP Foundation believe it&rsquo;s still relevant in that order, even tho I kinda disagree :P.
+Anyway, let&rsquo;s get started with the list.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="The OWASP Top 10 (Theory notes made by googling and reading different articles)">
+<meta property="og:description" content="What is OWASP Top 10? Well it&rsquo;s simply a list of top 10 web application security vulnerabilities. The link to the actual source material has been given already, so you can read more about it there. The list was last updated in 2021. Many security researchers including the very best in OWASP Foundation believe it&rsquo;s still relevant in that order, even tho I kinda disagree :P.
+Anyway, let&rsquo;s get started with the list.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/owasp_top_10/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2023-02-01T00:00:00+00:00">
+<meta property="article:modified_time" content="2023-02-01T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="The OWASP Top 10 (Theory notes made by googling and reading different articles)">
+<meta name=twitter:description content="What is OWASP Top 10? Well it&rsquo;s simply a list of top 10 web application security vulnerabilities. The link to the actual source material has been given already, so you can read more about it there. The list was last updated in 2021. Many security researchers including the very best in OWASP Foundation believe it&rsquo;s still relevant in that order, even tho I kinda disagree :P.
+Anyway, let&rsquo;s get started with the list.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.561e2ba2eab63e6ba89dd13267009c61d2378a48947490abfcc9457b14dcbad4.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io//home>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/blog/all_of_my_blogs>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+The OWASP Top 10 (Theory notes made by googling and reading different articles)
+</h1>
+<div class=meta>
+Posted on Feb 1, 2023
+</div>
+</div>
+<section class=body>
+<h1 id=what-is-owasp-top-10httpsowasporgwww-project-top-ten><a href=https://owasp.org/www-project-top-ten/>What is OWASP Top 10?</a></h1>
+<p>Well it&rsquo;s simply a list of top 10 web application security vulnerabilities. The link to the actual source material has been given already, so you can read more about it there. The list was last updated in 2021. Many security researchers including the very best in OWASP Foundation believe it&rsquo;s still relevant in that order, even tho I kinda disagree :P.</p>
+<p>Anyway, let&rsquo;s get started with the list. I&rsquo;ll be going through &ldquo;What&rsquo;s What&rdquo; and &ldquo;How to fix it&rdquo; for each of the top 10 vulnerabilities. If you wanna jump to the more technical stuffs, check <a href=https://owasp.org/Top10/>The Official OWASP Top 10:2021 Guide</a>.</p>
+<h1 id=a012021-broken-access-controlhttpsowasporgtop10a01_2021-broken_access_control><a href=https://owasp.org/Top10/A01_2021-Broken_Access_Control/>A01:2021-Broken Access Control</a></h1>
+<p>In simple terms this happens when &ldquo;confidential&rdquo; information/data is viewed or can be accessed by a user who shouldn&rsquo;t have access to it. Access control is making sure people have
+<code style=background-color:#ffbf00><span style=color:#ffbf00;filter:grayscale(1)invert(1)contrast(100)>ACCESS</span></code> to
+<code style=background-color:#0f0><span style=color:#0f0;filter:grayscale(1)invert(1)contrast(100)>what they're supposed to</span></code> and
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>DO NOT</span></code>have access to
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>WHAT THEY ARE NOT</span></code>. Broken Access Control is the evil alter-ego of this.</p>
+<p>What happens if people have access to stuffs they aren&rsquo;t supposed to? Well then :). It&rsquo;s a GOOD way to
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>BREACH</span></code> the entire <a href=/blog/cia_triad>CIA triad</a> of your application -> system -> organization.</p>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a><a class=soc href=https://www.linkedin.com/in/arkaprabhachakraborty/ title=LinkedIn><i data-feather=linkedin></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2023 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace({style:'max-height:15px !important'})</script></div>
+</body>
+</html>
