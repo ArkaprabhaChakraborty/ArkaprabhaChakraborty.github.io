@@ -37,5 +37,10 @@ Not all components are required to access a resource. The main mandatory fields 
 
 HTTPS is the secure version of HTTP, which uses SSL/TLS to encrypt the communication between the client and the server. The default port for HTTPS is 443, though this can be changed to any other port and depends on the web-server program's configuration. 
 
+Let's take a look at what's changed, shall we? Well then... Here is a dump/ packet capture of an HTTP request.
+![HTTP Dump](https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/http_wireshark_dump.png)
+See how everything is in plain text and everything is readable by the sniffer? Now let's take a look at the HTTPS dump.
+![HTTPS Dump](https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/https_wireshark_dump.png)
+See the gibberish in blue? That's because the data is encrypted. The client and the server use a shared secret key to encrypt and decrypt the data.
 **Note: Although the data transferred through the HTTPS protocol may be encrypted, the request may still reveal the visited URL if it contacted a clear-text DNS server. For this reason, it is recommended to utilize encrypted DNS servers (e.g. 8.8.8.8 or 1.2.3.4), or utilize a VPN service to ensure all traffic is properly encrypted.**
 
