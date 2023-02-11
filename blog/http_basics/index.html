@@ -104,7 +104,12 @@ Posted on Jan 10, 2022
 <p><strong>Note: Our browsers usually first look up records in the local &lsquo;/etc/hosts&rsquo; file, and if the requested domain does not exist within it, then they would contact other DNS servers. We can use the &lsquo;/etc/hosts&rsquo; to manually add records to for DNS resolution, by adding the IP followed by the domain name.</strong></p>
 <h1 id=https-http-securehttpswwwrfc-editororgrfcrfc2660><a href=https://www.rfc-editor.org/rfc/rfc2660>HTTPS (HTTP Secure)</a></h1>
 <p>HTTPS is the secure version of HTTP, which uses SSL/TLS to encrypt the communication between the client and the server. The default port for HTTPS is 443, though this can be changed to any other port and depends on the web-server program&rsquo;s configuration.</p>
-<p><strong>Note: Although the data transferred through the HTTPS protocol may be encrypted, the request may still reveal the visited URL if it contacted a clear-text DNS server. For this reason, it is recommended to utilize encrypted DNS servers (e.g. 8.8.8.8 or 1.2.3.4), or utilize a VPN service to ensure all traffic is properly encrypted.</strong></p>
+<p>Let&rsquo;s take a look at what&rsquo;s changed, shall we? Well then&mldr; Here is a dump/ packet capture of an HTTP request.
+<img src=https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/http_wireshark_dump.png alt="HTTP Dump">
+See how everything is in plain text and everything is readable by the sniffer? Now let&rsquo;s take a look at the HTTPS dump.
+<img src=https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/https_wireshark_dump.png alt="HTTPS Dump">
+See the gibberish in blue? That&rsquo;s because the data is encrypted. The client and the server use a shared secret key to encrypt and decrypt the data.
+<strong>Note: Although the data transferred through the HTTPS protocol may be encrypted, the request may still reveal the visited URL if it contacted a clear-text DNS server. For this reason, it is recommended to utilize encrypted DNS servers (e.g. 8.8.8.8 or 1.2.3.4), or utilize a VPN service to ensure all traffic is properly encrypted.</strong></p>
 </section>
 <div class=post-tags>
 </div>
