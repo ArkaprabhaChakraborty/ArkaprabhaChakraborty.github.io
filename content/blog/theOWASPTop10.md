@@ -14,3 +14,13 @@ Anyway, let's get started with the list. I'll be going through "What's What" and
 In simple terms this happens when "confidential" information/data is viewed or can be accessed by a user who shouldn't have access to it. Access control is making sure people have {{< colour "#FFBF00" "ACCESS">}} to {{< colour "#00FF00" "what they're supposed to">}} and {{< colour "#FF0000" "DO NOT">}}have access to {{< colour "#FF0000" "WHAT THEY ARE NOT">}}. Broken Access Control is the evil alter-ego of this.
 
 What happens if people have access to stuffs they aren't supposed to? Well then :). It's a GOOD way to {{< colour "#FF0000" "BREACH">}} the entire [CIA triad](/blog/cia_triad) of your application -> system -> organization.
+
+Now that we know what it is, how do we fix it? It is actually simple:
+- Use {{<colour "red" "strict">}} degree of access to make sure people have access to what they're supposed to.
+- Use ACL (Access Control List) to make sure people have access to what they're supposed to.
+- Enabling RBAC (Role Based Access Control) is a good way to quickly implement access control by grouping users into roles and defining the permissions associated with each role.
+- Implement control mechanisms on CORS (Cross Origin Resource Sharing) to make sure your server doesn't allow access to resources from other untrusted domains easily.
+- Test your access control mechanisms thoroughly and manually.
+- {{<colour "red" "Deny access by default">}} if a resource isn't meant to be shared with the general public.
+
+# [A02:2021-Cryptographic Failure](https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)
