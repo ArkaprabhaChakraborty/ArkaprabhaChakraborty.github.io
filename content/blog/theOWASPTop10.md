@@ -22,5 +22,46 @@ Now that we know what it is, how do we fix it? It is actually simple:
 - Implement control mechanisms on CORS (Cross Origin Resource Sharing) to make sure your server doesn't allow access to resources from other untrusted domains easily.
 - Test your access control mechanisms thoroughly and manually.
 - {{<colour "red" "Deny access by default">}} if a resource isn't meant to be shared with the general public.
+- Use {{<colour "yellow" "Logging and Monitoring">}} for all activities.
 
 # [A02:2021-Cryptographic Failure](https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)
+In simple terms, this happens when we don't use cryptography properly, or the cryptographic implementation is weak, and a logic flaw has been found in it. This is quite common if let's say a pseudo-random number generator is used to generate a key for encryption. This is a very common mistake, and it's a good idea to use a cryptographically secure pseudo-random number generator (CSPRNG) instead.
+
+But the above said reason is not the only reason why this happens. The following situations are also considered as Cryptographic Failures:
+- Using weak encryption algorithms.
+- Transmitting sensitive data in clear text, aka, missing encryption.
+- Using weak key lengths, or default or re-used crypto keys.
+- Use of weak hashing algorithms, like MD5.
+- Presence of sensitive data in source control.
+- Use of hard-coded passwords in configuration files :).
+- Easily exploitable cryptographic error messages.
+- Caching of sensitive data in memory.
+
+How do we fix it? It's simple:
+- Use {{<colour "red" "strong">}} encryption algorithms like AES, SHA256, RSA cryptosystem etc.
+- Encrypt data both in transit and at rest.
+- Keep a catalogue of all sensitive data.
+- {{<colour "red" "Never">}} use hard-coded passwords in configuration files.
+- {{<colour "red" "Never">}} use default or re-used crypto keys.
+- {{<colour "red" "DISCARD">}} all unused sensitive data from memory as soon as possible.
+- Use authenticated encryption to prevent tampering of data, instead of plain or simple encryption.
+- Enforce key rotation policy, to prevent the usage of same keys again and again. Automatic secure key generation and rotation is a good way to do this.
+- Use updated and secure libraries for cryptographic operations.
+
+# [A03:2021-Injection](https://owasp.org/Top10/A03_2021-Injection/)
+In simple terms, this happens when an attacker is able to inject malicious code into an application. This can be done by exploiting a vulnerability in the application's code, or by exploiting a vulnerability in the application's dependencies. This class of vulnerabilities include the infamous Cross-Site Scripting (XSS), SQL Injection (SQLi) and Command Injection (CMDi).
+
+When does it happen?
+- An application uses {{<colour "red" "untrusted data">}} in a {{<colour "red" "query">}} without {{<colour "red" "proper validation">}}.
+- An application uses {{<colour "red" "untrusted user input">}} in a {{<colour "red" "command">}} without {{<colour "red" "proper validation">}}.
+- No proper input validation is done on {{<colour "red" "user input">}}.
+
+How do we fix it? 
+- Use {{<colour "red" "proper validation">}} on all user input.
+- Use {{<colour "red" "parameterized queries">}} instead of {{<colour "red" "string concatenation">}}.
+- Proper input sanitization is a must.
+- Proactively test the application with automated DAST tools during development phase and during deployment phase to fix any vulnerabilities found.
+
+
+# [A04:2021-Insecure Design](https://owasp.org/Top10/A04_2021-Insecure_Design/)
+In simple terms, this happens when the application is designed in a way that makes it vulnerable to attacks.
