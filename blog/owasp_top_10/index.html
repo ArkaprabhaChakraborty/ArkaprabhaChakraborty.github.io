@@ -66,8 +66,65 @@ Posted on Feb 1, 2023
 <li>Test your access control mechanisms thoroughly and manually.</li>
 <li>
 <code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>Deny access by default</span></code> if a resource isn&rsquo;t meant to be shared with the general public.</li>
+<li>Use
+<code style=background-color:#ff0><span style=color:#ff0;filter:grayscale(1)invert(1)contrast(100)>Logging and Monitoring</span></code> for all activities.</li>
 </ul>
 <h1 id=a022021-cryptographic-failurehttpsowasporgtop10a02_2021-cryptographic_failures><a href=https://owasp.org/Top10/A02_2021-Cryptographic_Failures/>A02:2021-Cryptographic Failure</a></h1>
+<p>In simple terms, this happens when we don&rsquo;t use cryptography properly, or the cryptographic implementation is weak, and a logic flaw has been found in it. This is quite common if let&rsquo;s say a pseudo-random number generator is used to generate a key for encryption. This is a very common mistake, and it&rsquo;s a good idea to use a cryptographically secure pseudo-random number generator (CSPRNG) instead.</p>
+<p>But the above said reason is not the only reason why this happens. The following situations are also considered as Cryptographic Failures:</p>
+<ul>
+<li>Using weak encryption algorithms.</li>
+<li>Transmitting sensitive data in clear text, aka, missing encryption.</li>
+<li>Using weak key lengths, or default or re-used crypto keys.</li>
+<li>Use of weak hashing algorithms, like MD5.</li>
+<li>Presence of sensitive data in source control.</li>
+<li>Use of hard-coded passwords in configuration files :).</li>
+<li>Easily exploitable cryptographic error messages.</li>
+<li>Caching of sensitive data in memory.</li>
+</ul>
+<p>How do we fix it? It&rsquo;s simple:</p>
+<ul>
+<li>Use
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>strong</span></code> encryption algorithms like AES, SHA256, RSA cryptosystem etc.</li>
+<li>Encrypt data both in transit and at rest.</li>
+<li>Keep a catalogue of all sensitive data.</li>
+<li>
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>Never</span></code> use hard-coded passwords in configuration files.</li>
+<li>
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>Never</span></code> use default or re-used crypto keys.</li>
+<li>
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>DISCARD</span></code> all unused sensitive data from memory as soon as possible.</li>
+<li>Use authenticated encryption to prevent tampering of data, instead of plain or simple encryption.</li>
+<li>Enforce key rotation policy, to prevent the usage of same keys again and again. Automatic secure key generation and rotation is a good way to do this.</li>
+<li>Use updated and secure libraries for cryptographic operations.</li>
+</ul>
+<h1 id=a032021-injectionhttpsowasporgtop10a03_2021-injection><a href=https://owasp.org/Top10/A03_2021-Injection/>A03:2021-Injection</a></h1>
+<p>In simple terms, this happens when an attacker is able to inject malicious code into an application. This can be done by exploiting a vulnerability in the application&rsquo;s code, or by exploiting a vulnerability in the application&rsquo;s dependencies. This class of vulnerabilities include the infamous Cross-Site Scripting (XSS), SQL Injection (SQLi) and Command Injection (CMDi).</p>
+<p>When does it happen?</p>
+<ul>
+<li>An application uses
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>untrusted data</span></code> in a
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>query</span></code> without
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>proper validation</span></code>.</li>
+<li>An application uses
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>untrusted user input</span></code> in a
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>command</span></code> without
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>proper validation</span></code>.</li>
+<li>No proper input validation is done on
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>user input</span></code>.</li>
+</ul>
+<p>How do we fix it?</p>
+<ul>
+<li>Use
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>proper validation</span></code> on all user input.</li>
+<li>Use
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>parameterized queries</span></code> instead of
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>string concatenation</span></code>.</li>
+<li>Proper input sanitization is a must.</li>
+<li>Proactively test the application with automated DAST tools during development phase and during deployment phase to fix any vulnerabilities found.</li>
+</ul>
+<h1 id=a042021-insecure-designhttpsowasporgtop10a04_2021-insecure_design><a href=https://owasp.org/Top10/A04_2021-Insecure_Design/>A04:2021-Insecure Design</a></h1>
+<p>In simple terms, this happens when the application is designed in a way that makes it vulnerable to attacks.</p>
 </section>
 <div class=post-tags>
 </div>
