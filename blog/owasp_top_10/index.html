@@ -56,6 +56,18 @@ Posted on Feb 1, 2023
 <code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>WHAT THEY ARE NOT</span></code>. Broken Access Control is the evil alter-ego of this.</p>
 <p>What happens if people have access to stuffs they aren&rsquo;t supposed to? Well then :). It&rsquo;s a GOOD way to
 <code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>BREACH</span></code> the entire <a href=/blog/cia_triad>CIA triad</a> of your application -> system -> organization.</p>
+<p>Now that we know what it is, how do we fix it? It is actually simple:</p>
+<ul>
+<li>Use
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>strict</span></code> degree of access to make sure people have access to what they&rsquo;re supposed to.</li>
+<li>Use ACL (Access Control List) to make sure people have access to what they&rsquo;re supposed to.</li>
+<li>Enabling RBAC (Role Based Access Control) is a good way to quickly implement access control by grouping users into roles and defining the permissions associated with each role.</li>
+<li>Implement control mechanisms on CORS (Cross Origin Resource Sharing) to make sure your server doesn&rsquo;t allow access to resources from other untrusted domains easily.</li>
+<li>Test your access control mechanisms thoroughly and manually.</li>
+<li>
+<code style=background-color:red><span style=color:red;filter:grayscale(1)invert(1)contrast(100)>Deny access by default</span></code> if a resource isn&rsquo;t meant to be shared with the general public.</li>
+</ul>
+<h1 id=a022021-cryptographic-failurehttpsowasporgtop10a02_2021-cryptographic_failures><a href=https://owasp.org/Top10/A02_2021-Cryptographic_Failures/>A02:2021-Cryptographic Failure</a></h1>
 </section>
 <div class=post-tags>
 </div>
