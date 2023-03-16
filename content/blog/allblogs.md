@@ -20,6 +20,9 @@ These are all of my blogs till now in an organised manner. All of these are some
 - [DevOps Basics - Part 4: Uhh where do we start? 🚀](/blog/devops_basics_4)
 - [DevOps Basics - Part 5: Where to start?? 🚗](/blog/devops_basics_5)
 - [DevOps Basics - Part 6: The What Map?! 🗾](/blog/devops_basics_6)
+- [Containers Basics](/blog/containers_basics)
+- [Kubernetes Basics - What is it?](/blog/kubernetes_basics)
+- [Kubernetes Basics - Build a simple cluster lab on GCP](/blog/kubernetes_basics_1)
 
 # Security Learning:
 - [Networking Essentials](/blog/networking_essentials)
