@@ -1,0 +1,101 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Kubernetes Basics - Build a simple cluster lab on GCP - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="This is the first blog in the Kubernetes Basics series. In this blog, we will be setting up a simple Kubernetes cluster on GCP. We won&rsquo;t be using the GKE instead we will go for two identical Ubuntu 20.04 VMs to setup a simple lab setup. This is basically the starter point for CKS certification.
+Prerequisites:  A GCP account Knowledge of basic Linux commands Google Cloud CLI installed on your local machine  Step 1: Create two identical Ubuntu 20.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="Kubernetes Basics - Build a simple cluster lab on GCP">
+<meta property="og:description" content="This is the first blog in the Kubernetes Basics series. In this blog, we will be setting up a simple Kubernetes cluster on GCP. We won&rsquo;t be using the GKE instead we will go for two identical Ubuntu 20.04 VMs to setup a simple lab setup. This is basically the starter point for CKS certification.
+Prerequisites:  A GCP account Knowledge of basic Linux commands Google Cloud CLI installed on your local machine  Step 1: Create two identical Ubuntu 20.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/kubernetes_basics_1/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2023-02-18T00:00:00+00:00">
+<meta property="article:modified_time" content="2023-02-18T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Kubernetes Basics - Build a simple cluster lab on GCP">
+<meta name=twitter:description content="This is the first blog in the Kubernetes Basics series. In this blog, we will be setting up a simple Kubernetes cluster on GCP. We won&rsquo;t be using the GKE instead we will go for two identical Ubuntu 20.04 VMs to setup a simple lab setup. This is basically the starter point for CKS certification.
+Prerequisites:  A GCP account Knowledge of basic Linux commands Google Cloud CLI installed on your local machine  Step 1: Create two identical Ubuntu 20.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.561e2ba2eab63e6ba89dd13267009c61d2378a48947490abfcc9457b14dcbad4.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io//home>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/blog/all_of_my_blogs>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+Kubernetes Basics - Build a simple cluster lab on GCP
+</h1>
+<div class=meta>
+Posted on Feb 18, 2023
+</div>
+</div>
+<section class=body>
+<p>This is the first blog in the Kubernetes Basics series. In this blog, we will be setting up a simple Kubernetes cluster on GCP. We won&rsquo;t be using the GKE instead we will go for two identical Ubuntu 20.04 VMs to setup a simple lab setup. This is basically the starter point for CKS certification.</p>
+<h1 id=prerequisites>Prerequisites:</h1>
+<ul>
+<li>A GCP account</li>
+<li>Knowledge of basic Linux commands</li>
+<li><a href=https://cloud.google.com/sdk/docs/install-sdk>Google Cloud CLI</a> installed on your local machine</li>
+</ul>
+<h1 id=step-1-create-two-identical-ubuntu-2004-vms-on-gcp>Step 1: Create two identical Ubuntu 20.04 VMs on GCP</h1>
+<p>Let&rsquo;s Create two identical Ubuntu 20.04 VMs on GCP using the cloud CLI. I have named them <code>cks-master</code> and <code>cks-worker</code>. You can name them as you wish.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>gcloud compute instances create cks-master --zone<span style=color:#f92672>=</span>us-central1-c <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--machine-type<span style=color:#f92672>=</span>e2-medium <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--image<span style=color:#f92672>=</span>ubuntu-2004-focal-v20220419 <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--image-project<span style=color:#f92672>=</span>ubuntu-os-cloud <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--boot-disk-size<span style=color:#f92672>=</span>50GB
+
+gcloud compute instances create cks-worker --zone<span style=color:#f92672>=</span>us-central1-a <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--machine-type<span style=color:#f92672>=</span>e2-medium <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--image<span style=color:#f92672>=</span>ubuntu-2004-focal-v20220419 <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--image-project<span style=color:#f92672>=</span>ubuntu-os-cloud <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>--boot-disk-size<span style=color:#f92672>=</span>50GB
+</code></pre></div><p>You can do this in the <a href=https://cloud.google.com/compute/docs/create-linux-vm-instance>GCP console</a> as well. Just go to the Compute Engine section and create two VMs with the same configuration.</p>
+<h1 id=step-2-create-a-quick-startstop-script>Step 2: Create a quick start/stop script</h1>
+<p>Now that we have our VMs ready, we need to create a quick start and stop script for VMs. Very important if you don&rsquo;t wanna get booked beyond your budget.</p>
+<p><code>start-cks-lab</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>gcloud compute instances start cks-master --zone<span style=color:#f92672>=</span>us-central1-c
+gcloud compute instances start cks-worker --zone<span style=color:#f92672>=</span>us-central1-a
+</code></pre></div><p><code>stop-cks-lab</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>gcloud compute instances stop cks-master --zone<span style=color:#f92672>=</span>us-central1-c
+gcloud compute instances stop cks-worker --zone<span style=color:#f92672>=</span>us-central1-a
+</code></pre></div><h1 id=step-3-create-short-scripts-to-ssh-into-the-vms>Step 3: Create short scripts to SSH into the VMs</h1>
+<p>You can skip this step if you are comfortable with the <code>gcloud compute ssh</code> command. I personally prefer to create a short script to SSH into the VMs. This is just a personal preference.</p>
+<p><code>gssh-cks-master</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>gcloud compute ssh cks-master
+</code></pre></div><p><code>gssh-cks-worker</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>gcloud compute ssh cks-worker
+</code></pre></div><h1 id=step-4-ssh-into-the-vms-and-install-docker-and-kubernetes>Step 4: SSH into the VMs and install Docker and Kubernetes</h1>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a><a class=soc href=https://www.linkedin.com/in/arkaprabhachakraborty/ title=LinkedIn><i data-feather=linkedin></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2023 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace({style:'max-height:15px !important'})</script></div>
+</body>
+</html>

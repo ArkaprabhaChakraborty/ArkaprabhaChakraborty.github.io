@@ -1,0 +1,83 @@
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Containers Basics - Arkaprabha Chakraborty</title><link rel=icon type=image/png href=https://images.assetsdelivery.com/compings_v2/uasumy/uasumy1503/uasumy150300032.jpg><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="What is a container? You must have seen large ships with &ldquo;Containers&rdquo; - like the one shown below. Yes those colored boxes are called containers. They help to transport goods from one place to another. Each of these colored boxes are small isolated units that don&rsquo;t know what&rsquo;s inside the other and aren&rsquo;t even bothered by it [As if they have a life :) ]. While the containers &ldquo;contain&rdquo; the goods, they essentially rely on the ship for the actual transportation.">
+<meta property="og:image" content="https://raw.githubusercontent.com/athul/archie/master/images/archie-dark.png">
+<meta property="og:title" content="Containers Basics">
+<meta property="og:description" content="What is a container? You must have seen large ships with &ldquo;Containers&rdquo; - like the one shown below. Yes those colored boxes are called containers. They help to transport goods from one place to another. Each of these colored boxes are small isolated units that don&rsquo;t know what&rsquo;s inside the other and aren&rsquo;t even bothered by it [As if they have a life :) ]. While the containers &ldquo;contain&rdquo; the goods, they essentially rely on the ship for the actual transportation.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arkaprabhachakraborty.github.io/blog/containers_basics/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2023-02-26T00:00:00+00:00">
+<meta property="article:modified_time" content="2023-02-26T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Containers Basics">
+<meta name=twitter:description content="What is a container? You must have seen large ships with &ldquo;Containers&rdquo; - like the one shown below. Yes those colored boxes are called containers. They help to transport goods from one place to another. Each of these colored boxes are small isolated units that don&rsquo;t know what&rsquo;s inside the other and aren&rsquo;t even bothered by it [As if they have a life :) ]. While the containers &ldquo;contain&rdquo; the goods, they essentially rely on the ship for the actual transportation.">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://arkaprabhachakraborty.github.io/css/main.561e2ba2eab63e6ba89dd13267009c61d2378a48947490abfcc9457b14dcbad4.css>
+<link id=darkModeStyle rel=stylesheet type=text/css href=https://arkaprabhachakraborty.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css disabled>
+</head>
+<body>
+<div class=content><header>
+<div class=main>
+<a href=https://arkaprabhachakraborty.github.io//home>Arkaprabha Chakraborty</a>
+</div>
+<nav>
+<a href=/blog/all_of_my_blogs>Blogs</a>
+<a href=/posts>Projects</a>
+| <a id=dark-mode-toggle onclick=toggleTheme() href></a>
+<script src=https://arkaprabhachakraborty.github.io/js/themetoggle.js></script>
+</nav>
+</header>
+<main>
+<article>
+<div class=title>
+<h1 class=title>
+Containers Basics
+</h1>
+<div class=meta>
+Posted on Feb 26, 2023
+</div>
+</div>
+<section class=body>
+<h1 id=what-is-a-container>What is a container?</h1>
+<p>You must have seen large ships with &ldquo;Containers&rdquo; - like the one shown below. Yes those colored boxes are called containers. They help to transport goods from one place to another. Each of these colored boxes are small isolated units that don&rsquo;t know what&rsquo;s inside the other and aren&rsquo;t even bothered by it [As if they have a life :) ]. While the containers &ldquo;contain&rdquo; the goods, they essentially rely on the ship for the actual transportation.</p>
+<p><img src=https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/what-are-container-ships-1.png alt="Ship OP"></p>
+<p>This is exactly what a container is. Even in the world of software, a container is just a small isolated unit that doesn&rsquo;t know what&rsquo;s inside the other one and isn&rsquo;t even bothered by it. Containers are used to package software into small isolated units for easy deployment and scaling.</p>
+<h1 id=why-do-we-need-containers>Why do we need containers?</h1>
+<p>In a traditional deployment model, we have the hardware, the OS and the libraries and their related dependencies. Let&rsquo;s say we have a web application using NodeJS, MySQL, Redis and React. Mostly what we use are different libraries for the development of different web application functionalities. Every such libraries and frameworks have their own dependencies and OS-related dependencies.</p>
+<p>In a traditional deployment setup as shown in the image below, sometimes what can happen is that there can be some conflicts between the dependencies. This can be nightmare to debug and fix. Now let&rsquo;s just change the context and call the setup shown below as traditional development setup. Generally developers don&rsquo;t always work on the same one project. So if two projects require different versions of the same libraries or dependencies this can lead to a lot of conflicts.
+<img src=https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/traditional-deployment.png alt="Traditional deployment"></p>
+<p>This is where containers come into the game. With containers, we can package the application and all of its dependencies into a single unit. This makes it easy to build, ship, deploy and scale our applications easily. Let&rsquo;s take a look at the architecture. Like traditional model we have the hardware and OS, but now we have a container engine sitting on top of our OS. This container engine is responsible for creating and managing containers. Each container have their own isolated environment with different libraries and dependencies.
+<img src=https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/main/data/images/container-deployment.png alt="Container deployment"></p>
+<h1 id=so-what-are-the-general-advantages-of-containers>So what are the general advantages of containers?</h1>
+<ul>
+<li><strong>Isolation</strong>: Containers are isolated from each other and from the host. They have their own file system, their own networking, and their own isolated process tree separate from the host.</li>
+<li><strong>Resource efficiency</strong>: Containers can run without the extra load of a hypervisor. I&rsquo;ll discuss this later in a separate blog.</li>
+<li><strong>Ease of installation</strong>: Containers are easy to install and setup as compared to traditional methods where you may have to deal with a dependency hell.</li>
+<li><strong>Portability</strong>: You can easily move containers from one environment to another. This allows developers to quickly ship their applications to the cloud.</li>
+<li><strong>Scalability</strong>: Containers are designed to scale up and down easily. Again I will cover the scalability topic in a separate blog.</li>
+<li><strong>Developer productivity</strong>: Containers make it easy for developers to package up their applications and dependencies into a container that can be deployed and run anywhere.</li>
+<li><strong>Easy deployment and management</strong>: Containers make it easy to deploy and manage applications on a large scale.</li>
+</ul>
+<h1 id=so-where-does-this-container-thingy-stem-from>So where does this container thingy &ldquo;stem&rdquo; from?</h1>
+</section>
+<div class=post-tags>
+</div>
+</article>
+</main>
+<footer>
+<div style=display:flex><a class=soc href=https://github.com/ArkaprabhaChakraborty title=GitHub><i data-feather=github></i></a>
+<a class=border></a><a class=soc href=https://twitter.com/FValkyrie_17 title=Twitter><i data-feather=twitter></i></a>
+<a class=border></a><a class=soc href=https://gitlab.com/ArkaprabhaChakraborty title=GitLab><i data-feather=gitlab></i></a>
+<a class=border></a><a class=soc href=https://www.linkedin.com/in/arkaprabhachakraborty/ title=LinkedIn><i data-feather=linkedin></i></a>
+<a class=border></a></div>
+<div class=footer-info>
+2023 © ArkaprabhaChakraborty |
+</div>
+</footer>
+<script>feather.replace({style:'max-height:15px !important'})</script></div>
+</body>
+</html>
