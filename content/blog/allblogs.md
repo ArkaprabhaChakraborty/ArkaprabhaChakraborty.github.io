@@ -29,5 +29,7 @@ These are all of my blogs till now in an organised manner. All of these are some
 - [Basics of Security - Part 1: What is Computer Security? 💻](/blog/basics_of_security_1)
 - [Basics of Security - Part 2: H4X0R or H4Ck3r 🐱‍💻](/blog/basics_of_security_2)
 - [The CIA Triad ♺](/blog/cia_triad)
+- [Port Scanning with Nmap](/blog/port_scanning_with_nmap)
+- [Wireshark Basics](/blog/wireshark_basics)
 - [The OWASP Top 10 for Dummies :P](/blog/owasp_top_10)
 - [HTB Web Challenge walkthrough with OWASP ZAP: Templated](/blog/templated_htb_web_challenge_zap_walkthrough)
