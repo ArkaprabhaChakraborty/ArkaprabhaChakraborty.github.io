@@ -24,3 +24,8 @@ I'm a student developer, open source enthusiast and a wannabe security researche
 ```
 # Recent achievements 🏆:
 - [Google Summer of Code 2022 with OWASP ZAP.](https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero)
+
+# H4CK3R Profile:
+![TryHackMe](https://tryhackme-badges.s3.amazonaws.com/Arkaprabha.png)
+
+![HackTheBox](https://www.hackthebox.eu/badge/image/484700)

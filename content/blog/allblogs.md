@@ -33,3 +33,4 @@ These are all of my blogs till now in an organised manner. All of these are some
 - [Wireshark Basics](/blog/wireshark_basics)
 - [The OWASP Top 10 for Dummies :P](/blog/owasp_top_10)
 - [HTB Web Challenge walkthrough with OWASP ZAP: Templated](/blog/templated_htb_web_challenge_zap_walkthrough)
+- [Set Up a BurpSuite Invisible Proxy](/blog/burpsuite_invisible_proxy)
