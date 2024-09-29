@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>About on Arkaprabha Chakraborty</title><link>/tags/about/</link><description>Arkaprabha Chakraborty (About)</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
+(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/about/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="arkaprabha127001-whoami" >
+&lt;div>
+&lt;a href="#arkaprabha127001-whoami">
+#
+&lt;/a>
+[arkaprabha@127.0.0.1]$ whoami
+&lt;/div>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>Welcome to my little corner on the Internet.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>My name is &lt;span style="color:#ff6ac1">**&lt;/span>Arkaprabha Chakraborty&lt;span style="color:#ff6ac1">**&lt;/span>. I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m from Kolkata, West Bengal, India.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m a student developer, open source enthusiast and a wannabe security researcher.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">::&lt;/span> Things I &lt;span style="color:#ff6ac1">&amp;lt;&lt;/span>&lt;span style="color:#ff9f43">3&lt;/span>&lt;span style="color:#ff6ac1">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Tinkering with OS, Networking and Web applications.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Containers &lt;span style="color:#ff6ac1">&amp;amp;&lt;/span> Kubernetes.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Participating in CTFs.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Writing Blogs.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Contributing to various FOSS projects regularly.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="recent-achievements-" >
+&lt;div>
+&lt;a href="#recent-achievements-">
+#
+&lt;/a>
+Recent achievements 🏆:
+&lt;/div>
+&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP.&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="h4ck3r-profile" >
+&lt;div>
+&lt;a href="#h4ck3r-profile">
+#
+&lt;/a>
+H4CK3R Profile:
+&lt;/div>
+&lt;/h2>
+&lt;p>&lt;img src="https://tryhackme-badges.s3.amazonaws.com/Arkaprabha.png" alt="TryHackMe">&lt;/p>
+&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arkaprabha Chakraborty</title><link>https://arkaprabhachakraborty.github.io/posts/</link><description>Recent content on Arkaprabha Chakraborty</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© ArkaprabhaChakraborty</copyright><lastBuildDate>Fri, 08 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://arkaprabhachakraborty.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Very First Project</title><link>https://arkaprabhachakraborty.github.io/posts/firstproject/</link><pubDate>Fri, 08 Jul 2022 00:00:00 +0000</pubDate><guid>https://arkaprabhachakraborty.github.io/posts/firstproject/</guid><description>Things will come here shortly :P</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Arkaprabha Chakraborty</title><link>/posts/</link><description>Arkaprabha Chakraborty (Posts)</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
+(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Setup a lovely little portfolio with hugo</title><link>/blog/portfolio_with_hugo/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/portfolio_with_hugo/</guid><description>&lt;p>Hugo is an amazing tool. It&amp;rsquo;s a powerful static site generator that can be used to create a beautiful websites. Hugo, is world&amp;rsquo;s fastest static website engine. What I like about Hugo is it&amp;rsquo;s speed and flexibility.&lt;/p>
+&lt;p>For my blog I can just use some simple Markdown files, and Hugo build the site for me. This helps me to create a blog that is easy to manage. For starters I followed the &lt;a href="https://gohugo.io/getting-started/quick-start/">Hugo quick start tutorial&lt;/a> to setup a my portfolio website.&lt;/p>
+&lt;p>To start with hugo you need to install go. You can download the latest version of go from this &lt;a href="https://go.dev/dl/">link&lt;/a>. After that follow the instructions on go website and install it [there is no point to write about how to install go here].&lt;/p>
+&lt;p>After installing go, you can install hugo. I have built hugo from source and you can do the same by running the following commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir &lt;span style="color:#ff5c57">$HOME&lt;/span>/src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff5c57">cd&lt;/span> &lt;span style="color:#ff5c57">$HOME&lt;/span>/src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/gohugoio/hugo.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff5c57">cd&lt;/span> hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If you ever wanna &amp;ldquo;find&amp;rdquo; Hugo, you can find it whithin the src folder in your HOME directory, provided you followed the commands given above.&lt;/p>
+&lt;p>Now you can setup your special github repository, having the name &lt;code>&amp;lt;Your Username&amp;gt;.github.io&lt;/code>, clone the repo and setup a hugo site using the following commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff5c57">cd&lt;/span> /path/to/&amp;lt;Your Username&amp;gt;.github.io
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo new site .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This initiates a new site in the current directory. Now you can use any theme to decorate your site and start writing your content. I&amp;rsquo;ll use archie theme for this tutorial. Credits &lt;a href="https://github.com/athul">Athul Cyriac Ajay&lt;/a>.
+What I did was copy all of content archie theme&amp;rsquo;s layouts directory to my Hugo site&amp;rsquo;s layouts directory, all content from archie&amp;rsquo;s assets to my site&amp;rsquo;s assets dircetory and all the static files from archie&amp;rsquo;s static directory to my site&amp;rsquo;s static directory. Simple :)&lt;/p>
+&lt;p>For blogs everything goes into the cThe &lt;code>publish_dir&lt;/code> is the directory that you want to deploy.ontent folder. For example, if I want to create a blog called &amp;ldquo;My first blog&amp;rdquo; I can create a file called &lt;code>myfirstblog.md&lt;/code> in the content folder. It&amp;rsquo;s not necessary that the file name ends with &lt;code>.md&lt;/code> but I used an md :).&lt;/p>
+&lt;p>I have two sections for my portfolio, blog and posts. These are some default directories auto-parsed by Hugo. I did this by adding the follwing to my setup.toml&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[[menu.main]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#5af78e">&amp;#34;Blogs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url = &lt;span style="color:#5af78e">&amp;#34;/blog&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>weight = &lt;span style="color:#ff9f43">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[[menu.main]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#5af78e">&amp;#34;Projects&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url = &lt;span style="color:#5af78e">&amp;#34;/posts&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>weight = &lt;span style="color:#ff9f43">3&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since I have two sections I need an &lt;code>_index.md&lt;/code> file in each of them. For more info see the content sections in Hugo &lt;a href="https://gohugo.io/content-management/sections/">here&lt;/a>.&lt;/p>
+&lt;p>We are more or less set. Yaay!
+Now to publish your portfolio with github pages, you need to set up github actions. If you wanna manually publish your site, you can do that too. You can do that using the following commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will start the build process. It will create a public directory called &lt;code>public&lt;/code> in the current directory. This will contain your static site. You can copy the contents of this directory to your github pages branch. If you are going for this &amp;ldquo;easy&amp;rdquo; way trust me won&amp;rsquo;t be easy for you in near future as updating your site would be difficult.&lt;/p>
+&lt;p>This is why I recommend you to use github actions. It&amp;rsquo;s a simple and easy way to publish your site. Mainly we will be following the Hugo &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">docs&lt;/a> again.&lt;/p>
+&lt;p>To start with github actions you need to create a .github/ workflow directory from your repository root ie. your protfolio websites&amp;rsquo;s repository root. This directory will contain all the files that are required to run github actions. Now create a file named &lt;code>gh-pages.yml&lt;/code> in this directory.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">name&lt;/span>: GitHub Pages
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">branches&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - main &lt;span style="color:#78787e"># Set a branch to deploy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">pull_request&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">deploy&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">runs-on&lt;/span>: ubuntu-20.04
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">concurrency&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">group&lt;/span>: ${{ github.workflow }}-${{ github.ref }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">uses&lt;/span>: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Setup Hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">uses&lt;/span>: peaceiris/actions-hugo@v2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">hugo-version&lt;/span>: &lt;span style="color:#5af78e">&amp;#39;0.91.2&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#78787e"># extended: true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">run&lt;/span>: hugo --minify
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Deploy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">uses&lt;/span>: peaceiris/actions-gh-pages@v3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">if&lt;/span>: ${{ github.ref == &amp;#39;refs/heads/main&amp;#39; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">github_token&lt;/span>: ${{ secrets.GITHUB_TOKEN }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">publish_dir&lt;/span>: ./public
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Alrighty then! You are ready to go.&lt;/p>
+&lt;h1 id="wait-wait-wait" >
+&lt;div>
+&lt;a href="#wait-wait-wait">
+##
+&lt;/a>
+&lt;em>WAIT WAIT WAIT!!!!&lt;/em>
+&lt;/div>
+&lt;/h1>
+&lt;p>You don&amp;rsquo;t know what the hell is actually happening in the gh-pages.yml file! Never trust blogs blindly :). Who knows what malicious intent the person writing the blog has :P.&lt;/p>
+&lt;p>Let&amp;rsquo;s take you line by line through the yaml file.
+For the first part&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">name&lt;/span>: GitHub Pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is the workflow name. You can set to anything you want :). Really :).&lt;/p>
+&lt;p>The second section deals with the branches and &amp;ldquo;actions&amp;rdquo;.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">branches&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - main &lt;span style="color:#78787e"># Set a branch to deploy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">pull_request&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is the &amp;ldquo;on&amp;rdquo; section. Here you can set the branches that you want to deploy. You can set multiple branches. I have chosen the main branch because I mostly don&amp;rsquo;t work on main. I create to new branch to make changes and then merge them to main :) &amp;ldquo;A GOOD practice&amp;rdquo; :)&lt;/p>
+&lt;p>So whenever there is &amp;ldquo;push&amp;rdquo; to main branch, the deploy will be triggered. Now its not a good practice to run deployments directly, but it&amp;rsquo;s aa blogpost site :), so I didn&amp;rsquo;t wanna overcomplicate things.&lt;/p>
+&lt;p>Now comes the jobs section. This is where you can set the jobs. You can set multiple jobs. I have only one job which is deploy job.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">deploy&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">runs-on&lt;/span>: ubuntu-20.04
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">concurrency&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">group&lt;/span>: ${{ github.workflow }}-${{ github.ref }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>So the delpymnet runs on ubuntu-20.04. This is the OS that I have in my local setup too. You can set to anything you want. Then I have added a job level concurrency. This will allow other jobs in the workflow to proceed even if the concurrent job is &lt;code>pending&lt;/code>.&lt;/p>
+&lt;p>The next section deals with the steps that are followed by the job. At first I create a local copy/snapshot of the current main branch using the &lt;a href="https://github.com/actions/checkout">checkout&lt;/a> action. This action checks-out your repository under &lt;code>$GITHUB_WORKSPACE&lt;/code>, so your workflow can access it.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">uses&lt;/span>: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next we run a Setup Hugo action. This action will install Hugo and set up the hugo environment. Here I&amp;rsquo;m using the older Hugo version. You can set it whatever you want. For this we use the &lt;a href="https://github.com/peaceiris/actions-hugo">actions-hugo&lt;/a>. Kudos to &lt;a href="https://github.com/peaceiris">peaceiris&lt;/a> for his/her/their awesome work.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Setup Hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">uses&lt;/span>: peaceiris/actions-hugo@v2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">hugo-version&lt;/span>: &lt;span style="color:#5af78e">&amp;#39;0.91.2&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#78787e"># extended: true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next we run our Build action. This action will build the minified static site. I have chosen minify, you can choose not to opt for it.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">run&lt;/span>: hugo --minify
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next we run our Deploy action. This action will deploy the site to GitHub Pages. Here I&amp;rsquo;m using the &lt;a href="https://github.com/peaceiris/actions-gh-pages">actions-gh-pages&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ff6ac1">name&lt;/span>: Deploy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">uses&lt;/span>: peaceiris/actions-gh-pages@v3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">if&lt;/span>: ${{ github.ref == &amp;#39;refs/heads/main&amp;#39; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">github_token&lt;/span>: ${{ secrets.GITHUB_TOKEN }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">publish_dir&lt;/span>: ./public
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>GITHUB_TOKEN&lt;/code> is a unique token that GitHub automatically creates a unique GITHUB_TOKEN secret to use in your workflow. You can use the GITHUB_TOKEN to authenticate in a workflow run. When you enable GitHub Actions, GitHub installs a GitHub App on your repository. The GITHUB_TOKEN secret is a GitHub App installation access token. You can use the installation access token to authenticate on behalf of the GitHub App installed on your repository.
+For more info see the &lt;a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">automatic token authentication&lt;/a>.&lt;/p>
+&lt;p>So in this section we take the &lt;code>public&lt;/code> directory and deploy it to GitHub Pages. After that we trigger github pages deployment.&lt;/p>
+&lt;p>Yep that&amp;rsquo;s it :). Please note that you have to change github pages default branch to gh-pages after your first push. If you enjoyed it then do follow me on twitter and on github :P.&lt;/p></description></item></channel></rss>
