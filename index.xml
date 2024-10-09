@@ -104,13 +104,12 @@ I dropped in some &lt;code>console.log()&lt;/code> within the blocks like shown 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> decryptText(e, i) {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">let&lt;/span> n &lt;span style="color:#ff6ac1">=&lt;/span> nc.enc.Utf8.parse(i),
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a &lt;span style="color:#ff6ac1">=&lt;/span> nc.enc.Utf8.parse(i);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">let&lt;/span> decry &lt;span style="color:#ff6ac1">=&lt;/span> nc.AES.decrypt(e, n, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">return&lt;/span> nc.AES.decrypt(e, n, {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> keySize&lt;span style="color:#ff6ac1">:&lt;/span> &lt;span style="color:#ff9f43">16&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> iv&lt;span style="color:#ff6ac1">:&lt;/span> a,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mode&lt;span style="color:#ff6ac1">:&lt;/span> nc.mode.CBC,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> padding&lt;span style="color:#ff6ac1">:&lt;/span> nc.pad.Pkcs7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }).toString(nc.enc.Utf8);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">return&lt;/span> decry;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -287,7 +286,24 @@ I&amp;rsquo;m going in!
 &lt;img src="https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/refs/heads/main/assets/Client-side-HTTP-Encryption/Decrypted%20messages.png" alt="image">
 I got access to multiple keys like partner activation key, private and public keys but nothing much &lt;em>damaging&lt;/em>.&lt;/p>
 &lt;p>Next I tried to upload a file. Upon inspection of the proxy history I saw two POST requests being made. First one had a shorter encrypted body than the second. This was an obvious giveaway that the second one was uploading the file content, but then what was the first one? I decided to decrypt the response for the first request in the chain aaaannnnnd&amp;hellip;&amp;hellip;&amp;hellip;
-&lt;img src="" alt="iamge">&lt;/p></description></item><item><title>Setup a lovely little portfolio with hugo</title><link>/blog/portfolio_with_hugo/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/portfolio_with_hugo/</guid><description>&lt;p>Hugo is an amazing tool. It&amp;rsquo;s a powerful static site generator that can be used to create a beautiful websites. Hugo, is world&amp;rsquo;s fastest static website engine. What I like about Hugo is it&amp;rsquo;s speed and flexibility.&lt;/p>
+&lt;img src="https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/refs/heads/main/assets/Client-side-HTTP-Encryption/AWS%20Bucket%20keys%20leak%20Credential.png" alt="image">&lt;/p>
+&lt;p>Kaboom! AWS Secret Keys! Now that&amp;rsquo;s some serious &lt;em>damage&lt;/em>! I quickly set up the aws cli and fetched everything from the buckets.
+&lt;img src="https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/refs/heads/main/assets/Client-side-HTTP-Encryption/AWS%20Bucket%20keys%20leak%20Credential%20configuration.png" alt="image">
+&lt;img src="https://raw.githubusercontent.com/ArkaprabhaChakraborty/ArkaprabhaChakraborty.github.io/refs/heads/main/assets/Client-side-HTTP-Encryption/AWS%20Bucket%20info%20disclosure.png" alt="image">&lt;/p>
+&lt;p>I could have gone further but like most pentest engagements, I had limited time so I had to stop here. Also for the organization, this was enough evidence of compromise.&lt;/p>
+&lt;h2 id="what-could-have-been-done-better" >
+&lt;div>
+&lt;a href="#what-could-have-been-done-better">
+#
+&lt;/a>
+What could have been done better?
+&lt;/div>
+&lt;/h2>
+&lt;ol>
+&lt;li>Having application layer encryption or similar &amp;ldquo;maskings&amp;rdquo; aren&amp;rsquo;t always enough for shit designs. It&amp;rsquo;s important to learn and study secure system design (doesn&amp;rsquo;t matter whether you are a developer, software engineer or security engineer).&lt;/li>
+&lt;li>Shortcut implementation of complicated security techniques often lead to more disasters. Later in this case, the organization had actually implemented rotational IV and secret keys which could be fetched by the frontend, provided if a specific nonce attribute matched (kinda like Anti-CSRF tokens you can say).&lt;/li>
+&lt;li>Multi-platform -&amp;gt; At least &amp;ldquo;semi-multi&amp;rdquo; backend. :)&lt;/li>
+&lt;/ol></description></item><item><title>Setup a lovely little portfolio with hugo</title><link>/blog/portfolio_with_hugo/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/portfolio_with_hugo/</guid><description>&lt;p>Hugo is an amazing tool. It&amp;rsquo;s a powerful static site generator that can be used to create a beautiful websites. Hugo, is world&amp;rsquo;s fastest static website engine. What I like about Hugo is it&amp;rsquo;s speed and flexibility.&lt;/p>
 &lt;p>For my blog I can just use some simple Markdown files, and Hugo build the site for me. This helps me to create a blog that is easy to manage. For starters I followed the &lt;a href="https://gohugo.io/getting-started/quick-start/">Hugo quick start tutorial&lt;/a> to setup a my portfolio website.&lt;/p>
 &lt;p>To start with hugo you need to install go. You can download the latest version of go from this &lt;a href="https://go.dev/dl/">link&lt;/a>. After that follow the instructions on go website and install it [there is no point to write about how to install go here].&lt;/p>
 &lt;p>After installing go, you can install hugo. I have built hugo from source and you can do the same by running the following commands:&lt;/p>
