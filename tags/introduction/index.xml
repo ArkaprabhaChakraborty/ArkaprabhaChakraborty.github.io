@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction on Arkaprabha Chakraborty</title><link>/tags/introduction/</link><description>Arkaprabha Chakraborty (Introduction)</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
-(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/introduction/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="arkaprabha127001-whoami" >
+(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/introduction/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="t1ntin127001-whoami" >
 &lt;div>
-&lt;a href="#arkaprabha127001-whoami">
+&lt;a href="#t1ntin127001-whoami">
 #
 &lt;/a>
-[arkaprabha@127.0.0.1]$ whoami
+[t1ntin@127.0.0.1]$ whoami
 &lt;/div>
 &lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>Welcome to my little corner on the Internet.
@@ -14,7 +14,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">::&lt;/span> Things I &lt;span style="color:#ff6ac1">&amp;lt;&lt;/span>&lt;span style="color:#ff9f43">3&lt;/span>&lt;span style="color:#ff6ac1">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Tinkering with OS, Networking and Web applications.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Containers &lt;span style="color:#ff6ac1">&amp;amp;&lt;/span> Kubernetes.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Exploit Development &lt;span style="color:#ff6ac1">&amp;amp;&lt;/span> Evasion Research.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Participating in CTFs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Writing Blogs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Contributing to various FOSS projects regularly.
@@ -27,7 +27,7 @@ Recent achievements 🏆:
 &lt;/div>
 &lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="h4ck3r-profile" >
 &lt;div>
@@ -38,4 +38,18 @@ H4CK3R Profile:
 &lt;/div>
 &lt;/h2>
 &lt;p>&lt;img src="https://tryhackme-badges.s3.amazonaws.com/Arkaprabha.png" alt="TryHackMe">&lt;/p>
-&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p></description></item></channel></rss>
+&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p>
+&lt;h2 id="c3rt" >
+&lt;div>
+&lt;a href="#c3rt">
+#
+&lt;/a>
+C3rt$!
+&lt;/div>
+&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1737315304905/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">MCRTA&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1732951009966/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">ICCA&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1730225108986/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">eJPT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1723128873226/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">CEH master&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

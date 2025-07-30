@@ -1,0 +1,5 @@
+/*!
+  * Simple-Jekyll-Search
+  * Copyright 2015-2020, Christian Fei
+  * Licensed under the MIT License.
+  */(function(e){"use strict";const t=".mermaid",n=function(n){e.mermaid.initialize({theme:n}),e.mermaid.init({theme:n},document.querySelectorAll(t))},o=function(){return new Promise((e,n)=>{try{var s=document.querySelectorAll(t),o=s.length;s.forEach(t=>{t.setAttribute("data-original-code",t.innerHTML),o--,o==0&&e()})}catch(e){n(e)}})},s=function(){return new Promise((e,n)=>{try{var s=document.querySelectorAll(t),o=s.length;s.forEach(t=>{t.getAttribute("data-original-code")!=null&&(t.removeAttribute("data-processed"),t.innerHTML=t.getAttribute("data-original-code")),o--,o==0&&e()})}catch(e){n(e)}})},i=()=>{o().catch(console.error),document.body.addEventListener("dark-theme-set",()=>{s().then(n("dark")).catch(console.error)}),document.body.addEventListener("light-theme-set",()=>{s().then(n("default")).catch(console.error)})};e.initMermaid=i})(window)
