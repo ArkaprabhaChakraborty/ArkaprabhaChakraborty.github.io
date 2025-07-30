@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arkaprabha Chakraborty</title><link>/</link><description>Arkaprabha Chakraborty</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>t1nt1n</title><link>/</link><description>t1nt1n</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>arkaprabhachakraborty2001@gmail.com
 (Arkaprabha Chakraborty)</managingEditor><lastBuildDate>Sun, 06 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>CVE-2025-33053 Analysis</title><link>/blog/CVE-2025-33053-Analysis/</link><pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/blog/CVE-2025-33053-Analysis/</guid><description>&lt;h2 id="introduction" >
 &lt;div>
 &lt;a href="#introduction">
@@ -741,18 +741,19 @@ For the first part&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>GITHUB_TOKEN&lt;/code> is a unique token that GitHub automatically creates a unique GITHUB_TOKEN secret to use in your workflow. You can use the GITHUB_TOKEN to authenticate in a workflow run. When you enable GitHub Actions, GitHub installs a GitHub App on your repository. The GITHUB_TOKEN secret is a GitHub App installation access token. You can use the installation access token to authenticate on behalf of the GitHub App installed on your repository.
 For more info see the &lt;a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">automatic token authentication&lt;/a>.&lt;/p>
 &lt;p>So in this section we take the &lt;code>public&lt;/code> directory and deploy it to GitHub Pages. After that we trigger github pages deployment.&lt;/p>
-&lt;p>Yep that&amp;rsquo;s it :). Please note that you have to change github pages default branch to gh-pages after your first push. If you enjoyed it then do follow me on twitter and on github :P.&lt;/p></description></item><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="t1ntin127001-whoami" >
+&lt;p>Yep that&amp;rsquo;s it :). Please note that you have to change github pages default branch to gh-pages after your first push. If you enjoyed it then do follow me on twitter and on github :P.&lt;/p></description></item><item><title/><link>/about/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>arkaprabhachakraborty2001@gmail.com (Arkaprabha Chakraborty)</author><guid>/about/</guid><description>&lt;h2 id="t1nt1n127001-whoami" >
 &lt;div>
-&lt;a href="#t1ntin127001-whoami">
+&lt;a href="#t1nt1n127001-whoami">
 #
 &lt;/a>
-[t1ntin@127.0.0.1]$ whoami
+[t1nt1n@127.0.0.1]$ whoami
 &lt;/div>
 &lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>Welcome to my little corner on the Internet.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-Cpp" data-lang="Cpp">&lt;span style="display:flex;">&lt;span>Welcome to my little corner on the Internet.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>My name is &lt;span style="color:#ff6ac1">**&lt;/span>Arkaprabha Chakraborty&lt;span style="color:#ff6ac1">**&lt;/span>. I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m from Kolkata, West Bengal, India.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m a student developer, open source enthusiast and a wannabe security researcher.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>My name is &lt;span style="color:#ff6ac1">**&lt;/span>Arkaprabha Chakraborty&lt;span style="color:#ff6ac1">**&lt;/span> but you can also call me &lt;span style="color:#ff6ac1">**&lt;/span>Tintin&lt;span style="color:#ff6ac1">**&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m from Kolkata, West Bengal, India. I&lt;span style="color:#ff5c57">&amp;#39;&lt;/span>m a student developer, open source
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enthusiast and a wannabe security researcher.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff6ac1">::&lt;/span> Things I &lt;span style="color:#ff6ac1">&amp;lt;&lt;/span>&lt;span style="color:#ff9f43">3&lt;/span>&lt;span style="color:#ff6ac1">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Tinkering with OS, Networking and Web applications.
@@ -760,7 +761,19 @@ For more info see the &lt;a href="https://docs.github.com/en/actions/security-gu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Participating in CTFs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Writing Blogs.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff6ac1">-&lt;/span> Contributing to various FOSS projects regularly.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="recent-achievements-" >
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-philosophy" >
+&lt;div>
+&lt;a href="#-philosophy">
+#
+&lt;/a>
+🧠 Philosophy
+&lt;/div>
+&lt;/h2>
+&lt;p>I believe security research should be grounded in real systems - not just theoretical models. I’m especially drawn to projects where empirical methods (like reverse engineering, dynamic analysis, or causal reasoning) are used to understand and secure complex software systems.&lt;/p>
+&lt;p>I enjoy finding unconventional solutions to hard problems, and I spend most of my time learning, breaking, building, and documenting that process. Whether it’s digging into a registry key, intercepting a syscall chain, or exploring undocumented APIs, I’m probably knee-deep in something weird and wonderful.&lt;/p>
+&lt;p>I actively contribute to open-source, especially in areas intersecting infosec and developer tooling. Whether it&amp;rsquo;s writing Frida hooks, parsing weird logs, or improving reverse engineering workflows - I try to give back whenever I can.&lt;/p>
+&lt;p>If you like weird bugs, undocumented behaviors, or just good ol&amp;rsquo; shell-based exploration, you’re in the right place.&lt;/p>
+&lt;h2 id="recent-achievements-" >
 &lt;div>
 &lt;a href="#recent-achievements-">
 #
@@ -769,29 +782,7 @@ Recent achievements 🏆:
 &lt;/div>
 &lt;/h2>
 &lt;ul>
+&lt;li>Started working as Security Engineer at Qualys Threat Research Unit - November 2024&lt;/li>
+&lt;li>Started working full-time as a security consultant and red teamer at PwC (PricewaterhouseCoopers) - January 2023&lt;/li>
 &lt;li>&lt;a href="https://summerofcode.withgoogle.com/programs/2022/projects/XDtc6Ero">Google Summer of Code 2022 with OWASP ZAP&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="h4ck3r-profile" >
-&lt;div>
-&lt;a href="#h4ck3r-profile">
-#
-&lt;/a>
-H4CK3R Profile:
-&lt;/div>
-&lt;/h2>
-&lt;p>&lt;img src="https://tryhackme-badges.s3.amazonaws.com/Arkaprabha.png" alt="TryHackMe">&lt;/p>
-&lt;p>&lt;img src="https://www.hackthebox.eu/badge/image/484700" alt="HackTheBox">&lt;/p>
-&lt;h2 id="c3rt" >
-&lt;div>
-&lt;a href="#c3rt">
-#
-&lt;/a>
-C3rt$!
-&lt;/div>
-&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1737315304905/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">MCRTA&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1732951009966/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">ICCA&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1730225108986/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">eJPT&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linkedin.com/in/arkaprabhachakraborty/details/certifications/1723128873226/single-media-viewer/?profileId=ACoAAC0Vlv4BCjx4CE618yrZRD3DpIeubdx0e5U">CEH master&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>
